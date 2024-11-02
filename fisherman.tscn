@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://buad1dyyyy7aw"]
+
+[node name="Fisherman" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 457.0
+offset_top = 423.0
+offset_right = 721.0
+offset_bottom = 602.0
+text = "Add the fishmman sprite here, and we will need some basic animations, i am thinking a basic idle animation, a basic fish hooked animation, a struggling to catch fish animation and a fish caught animation."
+autowrap_mode = 3

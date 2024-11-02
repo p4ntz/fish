@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8vs5ifvkuo7o"]
+
+[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="1_58pd1"]
+[ext_resource type="Script" path="res://Scripts/new_game_button.gd" id="1_sq4cm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mw1bu"]
+font_size = 120
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Title Node" type="Node2D"]
+
+[node name="Title" type="Label" parent="."]
+offset_left = 447.0
+offset_top = 159.0
+offset_right = 692.0
+offset_bottom = 324.0
+text = "fish."
+label_settings = SubResource("LabelSettings_mw1bu")
+horizontal_alignment = 1
+
+[node name="LoadGameButton" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 344.0
+offset_right = 600.0
+offset_bottom = 375.0
+text = "Load Game"
+
+[node name="NewGameButton" type="Button" parent="."]
+offset_left = 507.0
+offset_top = 387.0
+offset_right = 603.0
+offset_bottom = 418.0
+text = "New Game"
+script = ExtResource("1_sq4cm")
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 510.0
+offset_top = 432.0
+offset_right = 606.0
+offset_bottom = 463.0
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 511.0
+offset_top = 476.0
+offset_right = 607.0
+offset_bottom = 507.0
+text = "Quit"
+script = ExtResource("1_58pd1")
+
+[connection signal="pressed" from="NewGameButton" to="NewGameButton" method="_on_pressed"]
+[connection signal="pressed" from="QuitButton" to="QuitButton" method="_on_pressed"]

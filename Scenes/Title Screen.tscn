@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8vs5ifvkuo7o"]
 
-[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="1_58pd1"]
-[ext_resource type="Script" path="res://Scripts/new_game_button.gd" id="1_sq4cm"]
+[ext_resource type="Script" path="res://Scripts/new_game_button.gd" id="1_dyww7"]
+[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="2_5xfiu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mw1bu"]
 font_size = 120
@@ -32,7 +32,7 @@ offset_top = 387.0
 offset_right = 603.0
 offset_bottom = 418.0
 text = "New Game"
-script = ExtResource("1_sq4cm")
+script = ExtResource("1_dyww7")
 
 [node name="SettingsButton" type="Button" parent="."]
 offset_left = 510.0
@@ -47,7 +47,7 @@ offset_top = 476.0
 offset_right = 607.0
 offset_bottom = 507.0
 text = "Quit"
-script = ExtResource("1_58pd1")
+script = ExtResource("2_5xfiu")
 
 [connection signal="pressed" from="NewGameButton" to="NewGameButton" method="_on_pressed"]
 [connection signal="pressed" from="QuitButton" to="QuitButton" method="_on_pressed"]

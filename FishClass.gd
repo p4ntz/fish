@@ -81,6 +81,8 @@ var smallest_caught: float = 0.0
 var last_caught_date: int = 0  # Unix timestamp
 var last_caught_location: String = ""
 
+# Feel Free to add more vars or Methods
+ 
 # Methods
 func calculate_current_EXP(size: float) -> int:
 	var exp_base = size + (rarity * 10)

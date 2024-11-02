@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://okyw50n3bdhe"]
+[gd_scene load_steps=3 format=3 uid="uid://okyw50n3bdhe"]
+
+[ext_resource type="Script" path="res://Scripts/FishingGame.gd" id="1_xpvtt"]
+[ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_xsjkn"]
 
 [node name="Fishing" type="Node2D"]
+script = ExtResource("1_xpvtt")
+
+[node name="RodHealthBar" type="ProgressBar" parent="."]
+offset_left = 1085.0
+offset_top = 97.0
+offset_right = 1118.0
+offset_bottom = 609.0
+fill_mode = 3
+
+[node name="CatchProgressBar" type="ProgressBar" parent="."]
+offset_left = 156.0
+offset_top = 37.0
+offset_right = 1035.0
+offset_bottom = 64.0
+
+[node name="FishStaminaBar" type="ProgressBar" parent="."]
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 57.0
+offset_bottom = 608.0
+fill_mode = 3
+
+[node name="NeutralFish" type="Sprite2D" parent="."]
+position = Vector2(575, 345)
+scale = Vector2(0.63, 0.5975)
+texture = ExtResource("2_xsjkn")
+
+[node name="LeftFish" type="Sprite2D" parent="."]
+position = Vector2(263, 356)
+scale = Vector2(0.63, 0.5975)
+texture = ExtResource("2_xsjkn")
+
+[node name="RightFish" type="Sprite2D" parent="."]
+position = Vector2(877, 351)
+scale = Vector2(0.63, 0.5975)
+texture = ExtResource("2_xsjkn")

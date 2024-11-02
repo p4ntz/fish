@@ -54,7 +54,7 @@ func _input(event):
 		try_catch_fish()
 	
 	# Check for mouse click
-	elif event.is_action_pressed("ui_click"):  # You'll need to set this up in project settings
+	elif event.is_action_pressed("ui_click"):
 		if event is InputEventMouseButton:
 			# Check if click is within fisher or indicator area
 			if is_click_in_area(event.position):
@@ -70,11 +70,7 @@ func is_click_in_area(click_pos: Vector2) -> bool:
 	return click_rect.has_point(local_pos)
 
 func try_catch_fish():
-	if indicator_active.visible:  # If there's a fish available
-		print("Fish caught!")
+	if indicator_active.visible:
+		print("fish. start!")
 		catch_window_timer.stop()
-		indicator_normal.visible = true
-		indicator_active.visible = false
-		
-		# Start the next fish spawn timer
-		start_fish_timer()
+		get_tree().change_scene_to_file("res://Scenes/fishing.tscn")

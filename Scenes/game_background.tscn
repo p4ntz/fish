@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b4n33w5u131ad"]
 
-[ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://fisherman.tscn" id="1_m356h"]
+[ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://Scenes/fisher.tscn" id="1_wa21t"]
 
 [node name="Game Background Node" type="Node2D"]
 
@@ -12,4 +12,4 @@ offset_bottom = 632.0
 text = "This is just some placeholder text, i want this scene to pretty much just be the background, where we can store other scenes like the main fishing game, the FishDex (name pending) and other the other possible screens we want to display for the user."
 autowrap_mode = 3
 
-[node name="Fisherman" parent="." instance=ExtResource("1_m356h")]
+[node name="Fisher" parent="." instance=ExtResource("1_wa21t")]

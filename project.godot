@@ -13,7 +13,20 @@ config_version=5
 config/name="fish"
 run/main_scene="res://Scenes/Title Screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+boot_splash/fullsize=false
+config/icon="res://Sprites/Fisher.png"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/per_pixel_transparency/allowed=true
+
+[gui]
+
+theme/custom_font="res://gonefishinggoofy.ttf"
+theme/default_font_hinting=2
 
 [input]
 

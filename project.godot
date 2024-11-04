@@ -17,6 +17,10 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 config/icon="res://Sprites/Fisher.png"
 
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+
 [display]
 
 window/size/viewport_width=1280

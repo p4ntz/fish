@@ -30,7 +30,7 @@ const HELD_CATCH_MULTIPLIER := 5.0
 
 func _ready():
 	# get a random fish!
-	var fish: Fish = Dex.new().init_data().random_fish()
+	var fish: Fish = Globals.DexInstance.random_fish()
 	
 	print("Picked Fish: " + fish.fish_name)
 	
@@ -80,6 +80,7 @@ func _process(delta):
 	
 	if catch_progress >= 100:
 		print("Fish caught!")
+		Globals.FishWasCaught = true
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
 
 func handle_tired_state(delta):

@@ -51,6 +51,13 @@ func _ready():
 
 func _process(delta):
 	if current_fish_stamina <= 0:
+		is_fish_tired = true
+	elif is_fish_tired && current_fish_stamina <= 100:
+		is_fish_tired = true
+	elif is_fish_tired && current_fish_stamina >= 100:
+		is_fish_tired = false
+
+	if is_fish_tired:
 		handle_tired_state(delta)
 	else:
 		handle_active_state(delta)
@@ -77,8 +84,8 @@ func handle_tired_state(delta):
 	update_direction_sprites("none")  # Update sprites to "neutral"
 	
 	# Restore stamina at the same rate it was drained
-	current_fish_stamina += STAMINA_DRAIN_RATE * delta
-	print("Restoring stamina: ", current_fish_stamina)
+	current_fish_stamina += abs(STAMINA_DRAIN_RATE * delta)
+	#print("Restoring stamina: ", current_fish_stamina)
 	
 	# Cap stamina at the maximum value
 	if current_fish_stamina >= max_fish_stamina:
@@ -95,20 +102,20 @@ func handle_active_state(delta):
 		if player_direction == fish_direction:
 			# Correct direction held - drain fish stamina
 			current_fish_stamina -= STAMINA_DRAIN_RATE * delta
-			print("Good pull!")
+			#print("Good pull!")
 		else:
 			# Wrong direction held - damage fishing rod
 			current_rod_health -= ROD_DAMAGE_RATE * delta
-			print("Wrong direction - damaging rod!")
+			#print("Wrong direction - damaging rod!")
 	
 	# Damage rod if pulling down during active fishing
 	if Input.is_action_pressed("ui_down") and not is_fish_tired:
 		current_rod_health -= ROD_DAMAGE_RATE * delta
-		print("Down pressed - damaging rod!")
+		#print("Down pressed - damaging rod!")
 	
 	# Check for rod break
 	if current_rod_health <= 0:
-		print("Rod broke!")
+		#print("Rod broke!")
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
 
 func get_player_direction() -> String:
@@ -123,7 +130,7 @@ func change_fish_direction():
 		# Randomly choose left or right
 		fish_direction = "left" if randf() < 0.5 else "right"
 		update_direction_sprites(fish_direction)
-		print("Fish moved " + fish_direction)
+		#print("Fish moved " + fish_direction)
 
 func update_direction_sprites(direction: String):
 	# Hide all sprites first

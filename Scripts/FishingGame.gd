@@ -29,6 +29,11 @@ const BASE_CATCH_RATE := 4
 const HELD_CATCH_MULTIPLIER := 5.0
 
 func _ready():
+	# get a random fish!
+	var fish: Fish = Dex.new().init_data().random_fish()
+	
+	print("Picked Fish: " + fish.fish_name)
+	
 	# Setup initial bar values
 	rod_health_bar.max_value = max_rod_health
 	rod_health_bar.value = current_rod_health

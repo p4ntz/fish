@@ -118,7 +118,7 @@ func roll_color_variant() -> void:
 	var total = 0.0
 	var roll = randf() * 100  # Random number between 0 and 100
 	
-	for color in color_spawn_chances:
+	for color in color_spawn_chances.keys():
 		total += color_spawn_chances[color]
 		if roll <= total:
 			current_color = color

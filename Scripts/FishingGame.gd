@@ -120,9 +120,9 @@ func handle_active_state(delta):
 
 func get_player_direction() -> String:
 	if Input.is_action_pressed("ui_left"):
-		return "left"
-	elif Input.is_action_pressed("ui_right"):
 		return "right"
+	elif Input.is_action_pressed("ui_right"):
+		return "left"
 	return "none"
 
 func change_fish_direction():

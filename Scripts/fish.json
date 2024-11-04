@@ -1,0 +1,5 @@
+{
+	"0":{"fish_name":"goldfish", "difficulty": 1, "rarity":0.1},
+	"1":{"fish_name":"bass","difficulty": 2, "rarity":0.5},
+	"2":{"fish_name":"salmon","difficulty": 3, "rarity":1.0}
+}

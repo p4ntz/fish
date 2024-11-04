@@ -7,17 +7,15 @@ class_name Dex
 
 # this is a hacky data insertion for now just to have some test data. It can be expanded easily in the future.
 func init_data() -> Dex:
-    var fishNames: Dictionary = {
-                                    0:{"fish_name":"goldfish", "difficulty": Fish.Difficulty.EASY, "rarity":0.1},
-                                    1:{"fish_name":"bass","difficulty": Fish.Difficulty.MEDIUM, "rarity":0.5},
-                                    2:{"fish_name":"salmon","difficulty": Fish.Difficulty.HARD, "rarity":1.0}
-                                }
-    for index in range(3):
+    var file := "res://Scripts/fish.json"
+    var json_as_text := FileAccess.get_file_as_string(file)
+    var fishNames: Dictionary = JSON.parse_string(json_as_text)
+    for index in range(3):      
         var fish = Fish.new()
-        fish.fish_name = fishNames[index]["fish_name"]
-        fish.catching_difficulty = fishNames[index]["difficulty"]
-        fish.rarity = fishNames[index]["rarity"]
-        FishData[fishNames[index]] = fish
+        fish.fish_name = fishNames[str(index)]["fish_name"]
+        fish.catching_difficulty = fishNames[str(index)]["difficulty"]
+        fish.rarity = fishNames[str(index)]["rarity"]
+        FishData[fishNames[str(index)]] = fish
     return self
 
 func random_fish() -> Fish:

@@ -1,14 +1,14 @@
 extends Node2D
 
 # Bar nodes
-@onready var rod_health_bar = $RodHealthBar
-@onready var fish_stamina_bar = $FishStaminaBar
-@onready var catch_progress_bar = $CatchProgressBar
+@onready var rod_health_bar := $RodHealthBar
+@onready var fish_stamina_bar := $FishStaminaBar
+@onready var catch_progress_bar := $CatchProgressBar
 
 # Sprite nodes for fish direction indicators
-@onready var left_sprites = [$LeftFish]
-@onready var right_sprites = [$RightFish]
-@onready var neutral_sprites = [$NeutralFish]
+@onready var left_sprites := [$LeftFish]
+@onready var right_sprites := [$RightFish]
+@onready var neutral_sprites := [$NeutralFish]
 
 # Game parameters
 var max_rod_health := 100.0
@@ -68,7 +68,7 @@ func _process(delta):
 		handle_active_state(delta)
 		
 	# Always increase catch progress
-	var catch_rate = BASE_CATCH_RATE
+	var catch_rate := BASE_CATCH_RATE
 	if Input.is_action_pressed("ui_down"):
 		catch_rate *= HELD_CATCH_MULTIPLIER
 	catch_progress += catch_rate * delta
@@ -81,6 +81,7 @@ func _process(delta):
 	if catch_progress >= 100:
 		print("Fish caught!")
 		Globals.FishWasCaught = true
+		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
 
 func handle_tired_state(delta):
@@ -102,7 +103,7 @@ func handle_tired_state(delta):
 
 
 func handle_active_state(delta):
-	var player_direction = get_player_direction()
+	var player_direction := get_player_direction()
 	
 	if player_direction != "none":
 		if player_direction == fish_direction:
@@ -144,7 +145,7 @@ func update_direction_sprites(direction: String):
 		sprite.hide()
 	
 	# Show the appropriate sprites based on direction
-	var sprites_to_show = []
+	var sprites_to_show := []
 	match direction:
 		"left":
 			sprites_to_show = left_sprites

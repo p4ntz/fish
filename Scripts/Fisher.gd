@@ -38,13 +38,18 @@ func _ready():
 	# Display a message if we just left the Fishing Game
 	if Globals.IsFishing:
 		if Globals.FishWasCaught:
-			fish_caught.text = "Caught a %s!" % Globals.DexInstance.tracked_fish.fish_name
+			var format_string := "Caught a {name}! It's about {size}{size_unit}!"
+			fish_caught.text = format_string.format({"name":Globals.DexInstance.tracked_fish.fish_name, "size": Globals.DexInstance.tracked_fish.current_size, "size_unit": Globals.DexInstance.tracked_fish.size_unit})
 		else:
 			fish_caught.text = "Looks like that one got away!"
 		# Clean up state.
 		Globals.FishWasCaught = false
 		Globals.IsFishing = false
 		
+		# Free the Fish ref for memeory management
+		Globals.DexInstance.free_fish()
+		
+		# Display notice
 		fish_caught.visible = true
 		caught_message_timer.start(5.0)
 

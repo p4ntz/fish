@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8vs5ifvkuo7o"]
+[gd_scene load_steps=6 format=3 uid="uid://b8vs5ifvkuo7o"]
 
 [ext_resource type="Script" path="res://Scripts/new_game_button.gd" id="1_dyww7"]
 [ext_resource type="Script" path="res://Scripts/MinResizeWindow.gd" id="1_whoat"]
 [ext_resource type="Script" path="res://Scripts/quit_button.gd" id="2_5xfiu"]
+[ext_resource type="Script" path="res://Scenes/title_music.gd" id="2_akphk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mw1bu"]
 font_size = 120
@@ -41,6 +42,7 @@ grow_vertical = 2
 text = "fish."
 label_settings = SubResource("LabelSettings_mw1bu")
 horizontal_alignment = 1
+script = ExtResource("2_akphk")
 
 [node name="LoadGameButton" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1

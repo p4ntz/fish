@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://buad1dyyyy7aw"]
+[gd_scene load_steps=6 format=3 uid="uid://buad1dyyyy7aw"]
 
 [ext_resource type="Script" path="res://Scripts/Fisher.gd" id="1_4qm21"]
 [ext_resource type="Texture2D" uid="uid://1rai4xu0bm1u" path="res://Sprites/Fisher.png" id="1_ieamg"]
 [ext_resource type="Texture2D" uid="uid://dk0pai61bsa1k" path="res://Sprites/FisherAbove1.png" id="2_n4rv7"]
+[ext_resource type="Script" path="res://Scenes/Fisher_waiting_music.gd" id="3_065n4"]
 [ext_resource type="Texture2D" uid="uid://dhakhv7yq24cm" path="res://Sprites/FisherAbove2.png" id="3_tae2p"]
 
 [node name="Fisher" type="Node2D"]
@@ -20,6 +21,7 @@ autowrap_mode = 3
 position = Vector2(572, 611)
 scale = Vector2(0.532374, 0.532374)
 texture = ExtResource("1_ieamg")
+script = ExtResource("3_065n4")
 
 [node name="Indicator1" type="Sprite2D" parent="."]
 position = Vector2(570, 541)

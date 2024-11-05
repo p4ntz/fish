@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://okyw50n3bdhe"]
+[gd_scene load_steps=6 format=3 uid="uid://okyw50n3bdhe"]
 
 [ext_resource type="Script" path="res://Scripts/FishingGame.gd" id="1_xpvtt"]
 [ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_xsjkn"]
+[ext_resource type="Texture2D" uid="uid://b8ce423vw1h61" path="res://Sprites/IdleFishingRod.png" id="3_i7wjs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hg235"]
+load_path = "res://.godot/imported/FishingRodMiddlePull.png-636ebb36a3d29244b64276010f82d44f.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x5ogo"]
+load_path = "res://.godot/imported/FishingRodSidePull.png-fb6f6a8ab37e5531e1ee8a028afba747.ctex"
 
 [node name="Fishing" type="Node2D"]
 script = ExtResource("1_xpvtt")
@@ -40,6 +47,7 @@ texture = ExtResource("2_xsjkn")
 position = Vector2(877, 351)
 scale = Vector2(0.63, 0.5975)
 texture = ExtResource("2_xsjkn")
+flip_h = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 3.0
@@ -62,3 +70,28 @@ offset_right = 658.0
 offset_bottom = 31.0
 text = "Catch Percentage"
 fit_content = true
+
+[node name="IdleRod" type="Sprite2D" parent="."]
+position = Vector2(575, 345)
+scale = Vector2(0.63, 0.5975)
+texture = ExtResource("3_i7wjs")
+offset = Vector2(0, 400)
+
+[node name="MiddleRodBend" type="Sprite2D" parent="."]
+position = Vector2(575, 345)
+scale = Vector2(0.75, 0.712)
+texture = SubResource("CompressedTexture2D_hg235")
+offset = Vector2(0, 320)
+
+[node name="LeftRodBend" type="Sprite2D" parent="."]
+position = Vector2(575, 345)
+scale = Vector2(0.63, 0.5975)
+texture = SubResource("CompressedTexture2D_x5ogo")
+offset = Vector2(-200, 350)
+
+[node name="RightRodBend" type="Sprite2D" parent="."]
+position = Vector2(575, 345)
+scale = Vector2(0.63, 0.5975)
+texture = SubResource("CompressedTexture2D_x5ogo")
+offset = Vector2(200, 350)
+flip_h = true

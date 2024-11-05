@@ -10,6 +10,14 @@ extends Node2D
 @onready var right_sprites := [$RightFish]
 @onready var neutral_sprites := [$NeutralFish]
 
+# Sprite nodes for fishing rod direction indicators
+@onready var left_rod_sprites := [$LeftRodBend]
+@onready var right_rod_sprites := [$RightRodBend]
+@onready var idle_rod_sprites := [$IdleRod]
+@onready var middle_rod_sprites := [$MiddleRodBend]
+
+signal minigame_completed
+
 # Game parameters
 var max_rod_health := 100.0
 var current_rod_health := 100.0
@@ -53,6 +61,7 @@ func _ready():
 	
 	# Initialize sprites
 	update_direction_sprites("none")
+	update_rod_direction_sprites()
 
 func _process(delta):
 	if current_fish_stamina <= 0:
@@ -83,6 +92,9 @@ func _process(delta):
 		Globals.FishWasCaught = true
 		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
+		
+	#Update the rod sprite	
+	update_rod_direction_sprites()
 
 func handle_tired_state(delta):
 	is_fish_tired = true
@@ -114,6 +126,11 @@ func handle_active_state(delta):
 			# Wrong direction held - damage fishing rod
 			current_rod_health -= ROD_DAMAGE_RATE * delta
 			#print("Wrong direction - damaging rod!")
+
+	if player_direction == "none":
+		# Slowly damage the rod if no direction is pressed
+		current_rod_health -= ROD_DAMAGE_RATE * delta * 0.25
+		#print("No direction pressed - slowly damaging rod!")
 	
 	# Damage rod if pulling down during active fishing
 	if Input.is_action_pressed("ui_down") and not is_fish_tired:
@@ -153,6 +170,25 @@ func update_direction_sprites(direction: String):
 			sprites_to_show = right_sprites
 		"none":
 			sprites_to_show = neutral_sprites
+	
+	for sprite in sprites_to_show:
+		sprite.show()
+
+func update_rod_direction_sprites():
+	# Hide all sprites first
+	for sprite in left_rod_sprites + right_rod_sprites + idle_rod_sprites + middle_rod_sprites:
+		sprite.hide()
+		
+	# Get arrow key held down and show the appropriate sprites based on direction	
+	var sprites_to_show := []
+	if Input.is_action_pressed("ui_left"):
+		sprites_to_show = right_rod_sprites
+	elif Input.is_action_pressed("ui_right"):
+		sprites_to_show = left_rod_sprites
+	elif Input.is_action_pressed("ui_down"):
+		sprites_to_show = middle_rod_sprites
+	else:
+		sprites_to_show = idle_rod_sprites
 	
 	for sprite in sprites_to_show:
 		sprite.show()

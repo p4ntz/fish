@@ -1,5 +1,151 @@
 {
-	"0":{"fish_name":"goldfish", "difficulty": 1, "rarity":0.1},
-	"1":{"fish_name":"bass","difficulty": 2, "rarity":0.5},
-	"2":{"fish_name":"salmon","difficulty": 3, "rarity":1.0}
+	"0": {
+		"fish_name": "Goldfish",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": ["pond"]
+	},
+	"1": {
+		"fish_name": "Bass",
+		"difficulty": 2,
+		"rarity": 0.2,
+		"locations": ["river", "lake"]
+	},
+	"2": {
+		"fish_name": "Curried Salmon",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["market"]
+	},
+	"3": {
+		"fish_name": "Perch",
+		"difficulty": 2,
+		"rarity": 0.1,
+		"locations": ["river"]
+	},
+	"4": {
+		"fish_name": "Can of Tuna",
+		"difficulty": 3,
+		"rarity": 0.6,
+		"locations": ["market"]
+	},
+	"5": {
+		"fish_name": "Bluegill",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"6": {
+		"fish_name": "Redgill",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"7": {
+		"fish_name": "Yellowgill",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"8": {
+		"fish_name": "Puffer Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"]
+	},
+	"9": {
+		"fish_name": "Ogre Eel",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["toilet"]
+	},
+	"10": {
+		"fish_name": "Walleye",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["river", "lake"],
+		"scientific_name": "Sander Vitreus",
+		"description": "A freshwater fish found in North America"
+	},
+	"11": {
+		"fish_name": "Sea Urchin",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"]
+	},
+	"12": {
+		"fish_name": "Plastic Fish with Googly Eyes",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["Kiddie Pool"]
+	},
+	"13": {
+		"fish_name": "A Man in a Fish Costume",
+		"difficulty": 3,
+		"rarity": 0.5,
+		"locations": ["office", "market", "mall"],
+		"scientific_name": "Homo Sapian Piscis",
+		"description": "It's just a dude, dressed up like a fish. Why'd he bite the line?"
+	},
+	"14": {
+		"fish_name": "Lionfish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"],
+		"scientific_name": "Pterois Volitans"
+	},
+	"15": {
+		"fish_name": "Catphish",
+		"difficulty": 3,
+		"rarity": 0.1,
+		"locations": ["office"],
+		"scientific_name": "Fakeus Emailus"
+	},
+	"16": {
+		"fish_name": "A Living Pot of Fish Stew",
+		"difficulty": 3,
+		"rarity": 0.5,
+		"locations": ["market"]
+	},
+	"17": {
+		"fish_name": "Parrot Fish",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"18": {
+		"fish_name": "Red Snapper",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"19": {
+		"fish_name": "Cheese Carp",
+		"difficulty": 3,
+		"rarity": 0.3,
+		"locations": ["toilet", "pool", "office"]
+	},
+	"20": {
+		"fish_name": "Rune Fish",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"21": {
+		"fish_name": "Rubber Ducky",
+		"difficulty": 3,
+		"rarity": 0.1,
+		"locations": ["pool"]
+	},
+	"22": {
+		"fish_name": "Money Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["office"]
+	},
+	"23": {
+		"fish_name": "Sturgeon",
+		"difficulty": 3,
+		"rarity": 1
+	},
+	"24": {
+		"fish_name": "FRUG",
+		"difficulty": 3,
+		"rarity": 0.3,
+		"locations": ["river"]
+	}
 }

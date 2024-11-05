@@ -10,12 +10,22 @@ func init_data() -> Dex:
     var file := "res://Scripts/fish.json"
     var json_as_text := FileAccess.get_file_as_string(file)
     var fishNames: Dictionary = JSON.parse_string(json_as_text)
-    for index in range(3):      
+    var locations: Array = []
+    for index in fishNames.keys():      
         var fish = Fish.new()
-        fish.fish_name = fishNames[str(index)]["fish_name"]
-        fish.catching_difficulty = fishNames[str(index)]["difficulty"]
-        fish.rarity = fishNames[str(index)]["rarity"]
-        FishData[fishNames[str(index)]] = fish
+        fish.fish_name = fishNames[index]["fish_name"]
+        fish.catching_difficulty = fishNames[index]["difficulty"]
+        fish.rarity = fishNames[index]["rarity"]
+        fish.description = fishNames[index]["description"]
+        fish.scientific_name = fishNames[index]["scientific_name"]
+        fish.locations = fishNames[index]["locations"]
+        for location in fishNames[index]["locations"]:
+            if not location in locations:
+                locations.append(fishNames[index]["locations"])
+        FishData[fishNames[index]] = fish
+    for location in locations:
+        # init location info empty atm. make a json file for location data later and load the fish into it or something
+        LocationData[location] = {}
     return self
 
 func random_fish() -> Fish:

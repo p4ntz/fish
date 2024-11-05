@@ -1,5 +1,202 @@
 {
-	"0":{"fish_name":"goldfish", "difficulty": 1, "rarity":0.1},
-	"1":{"fish_name":"bass","difficulty": 2, "rarity":0.5},
-	"2":{"fish_name":"salmon","difficulty": 3, "rarity":1.0}
+	"0": {
+		"fish_name": "Goldfish",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": ["pond"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"1": {
+		"fish_name": "Bass",
+		"difficulty": 2,
+		"rarity": 0.2,
+		"locations": ["river", "lake"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"2": {
+		"fish_name": "Curried Salmon",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["market"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"3": {
+		"fish_name": "Perch",
+		"difficulty": 2,
+		"rarity": 0.1,
+		"locations": ["river"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"4": {
+		"fish_name": "Can of Tuna",
+		"difficulty": 3,
+		"rarity": 0.6,
+		"locations": ["market"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"5": {
+		"fish_name": "Bluegill",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"6": {
+		"fish_name": "Redgill",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"7": {
+		"fish_name": "Yellowgill",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"8": {
+		"fish_name": "Puffer Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"9": {
+		"fish_name": "Ogre Eel",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["toilet"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"10": {
+		"fish_name": "Walleye",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["river", "lake"],
+		"scientific_name": "Sander Vitreus",
+		"description": "A freshwater fish found in North America"
+	},
+	"11": {
+		"fish_name": "Sea Urchin",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"12": {
+		"fish_name": "Plastic Fish with Googly Eyes",
+		"difficulty": 3,
+		"rarity": 0.4,
+		"locations": ["Kiddie Pool"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"13": {
+		"fish_name": "A Man in a Fish Costume",
+		"difficulty": 3,
+		"rarity": 0.5,
+		"locations": ["office", "market", "mall"],
+		"scientific_name": "Homo Sapian Piscis",
+		"description": "It's just a dude, dressed up like a fish. Why'd he bite the line?"
+	},
+	"14": {
+		"fish_name": "Lionfish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["ocean"],
+		"scientific_name": "Pterois Volitans",
+		"description": ""
+	},
+	"15": {
+		"fish_name": "Catphish",
+		"difficulty": 3,
+		"rarity": 0.1,
+		"locations": ["office"],
+		"scientific_name": "Fakeus Emailus",
+		"description": ""
+	},
+	"16": {
+		"fish_name": "A Living Pot of Fish Stew",
+		"difficulty": 3,
+		"rarity": 0.5,
+		"locations": ["market"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"17": {
+		"fish_name": "Parrot Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"18": {
+		"fish_name": "Red Snapper",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"19": {
+		"fish_name": "Cheese Carp",
+		"difficulty": 3,
+		"rarity": 0.3,
+		"locations": ["toilet", "pool", "office"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"20": {
+		"fish_name": "Rune Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"description": "",
+		"scientific_name": "",
+		"locations": ["river"]
+	},
+	"21": {
+		"fish_name": "Rubber Ducky",
+		"difficulty": 3,
+		"rarity": 0.1,
+		"locations": ["pool"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"22": {
+		"fish_name": "Money Fish",
+		"difficulty": 3,
+		"rarity": 1,
+		"locations": ["office"],
+		"scientific_name": "",
+		"description": ""
+	},
+	"23": {
+		"fish_name": "Sturgeon",
+		"difficulty": 3,
+		"rarity": 1,
+		"scientific_name": "",
+		"locations": ["lake"],
+		"description": ""
+	},
+	"24": {
+		"fish_name": "FRUG",
+		"difficulty": 3,
+		"rarity": 0.3,
+		"locations": ["river"],
+		"scientific_name": "",
+		"description": ""
+	}
 }

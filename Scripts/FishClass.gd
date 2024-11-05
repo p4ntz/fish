@@ -20,7 +20,7 @@ class_name Fish
 @export var size_unit: String = "cm"
 
 # Spawning/Catching Properties
-@export var locations: Array[String] = []
+@export var locations: Array = []
 @export var seasons: Array[String] = ["Spring", "Summer", "Fall", "Winter"]
 @export var time_of_day: Array[String] = ["Morning", "Afternoon", "Evening", "Night"]
 @export var depth_range: Vector2 = Vector2(0.0, 10.0)  # min and max depth

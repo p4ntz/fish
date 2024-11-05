@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bioiveufqkyt1"
-path="res://.godot/imported/gonefishing.ttf-434883f9de95ff7718d59436b3e8b094.fontdata"
+path="res://.godot/imported/gonefishing.ttf-0192fc4956db820bb8daa7efdf616c06.fontdata"
 
 [deps]
 
-source_file="res://gonefishing.ttf"
-dest_files=["res://.godot/imported/gonefishing.ttf-434883f9de95ff7718d59436b3e8b094.fontdata"]
+source_file="res://Fonts/gonefishing.ttf"
+dest_files=["res://.godot/imported/gonefishing.ttf-0192fc4956db820bb8daa7efdf616c06.fontdata"]
 
 [params]
 

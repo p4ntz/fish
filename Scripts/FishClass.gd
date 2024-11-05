@@ -21,8 +21,8 @@ class_name Fish
 
 # Spawning/Catching Properties
 @export var locations: Array = []
-@export var seasons: Array[String] = ["Spring", "Summer", "Fall", "Winter"]
-@export var time_of_day: Array[String] = ["Morning", "Afternoon", "Evening", "Night"]
+@export var seasons: Array = []
+@export var time_of_day: Array = []
 @export var depth_range: Vector2 = Vector2(0.0, 10.0)  # min and max depth
 
 # Rarity and Value
@@ -129,8 +129,19 @@ func roll_color_variant() -> void:
 func get_color_name() -> String:
 	return ColorVariant.keys()[current_color]
 
-func can_be_caught_now(current_time: String, current_season: String) -> bool:
-	return time_of_day.has(current_time) and seasons.has(current_season)
+func can_be_caught_now(current_time: String, current_season: String, current_location: String) -> bool:
+	var can_catch: bool = true
+
+	if not current_location in locations:
+		can_catch = false
+		
+	if not current_time in time_of_day:
+		can_catch = false
+		
+	if not current_season in seasons:
+		can_catch = false
+
+	return can_catch
 
 func record_catch(size: float, location: String) -> void:
 	amount_caught += 1
@@ -143,3 +154,4 @@ func record_catch(size: float, location: String) -> void:
 	last_caught_location = location
 	last_caught_date = Time.get_unix_time_from_system()
 	is_discovered = true
+	return

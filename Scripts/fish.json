@@ -3,41 +3,112 @@
 		"fish_name": "Goldfish",
 		"difficulty": 1,
 		"rarity": 0.1,
-		"locations": ["pond"],
+		"locations": [
+			"pond"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"1": {
 		"fish_name": "Bass",
 		"difficulty": 2,
 		"rarity": 0.2,
-		"locations": ["river", "lake"],
+		"locations": [
+			"river",
+			"lake"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"2": {
 		"fish_name": "Curried Salmon",
 		"difficulty": 3,
 		"rarity": 0.4,
-		"locations": ["market"],
+		"locations": [
+			"market"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"3": {
 		"fish_name": "Perch",
 		"difficulty": 2,
 		"rarity": 0.1,
-		"locations": ["river"],
+		"locations": [
+			"river"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"4": {
 		"fish_name": "Can of Tuna",
 		"difficulty": 3,
 		"rarity": 0.6,
-		"locations": ["market"],
+		"locations": [
+			"market"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"5": {
 		"fish_name": "Bluegill",
@@ -45,7 +116,21 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"6": {
 		"fish_name": "Redgill",
@@ -53,7 +138,21 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"7": {
 		"fish_name": "Yellowgill",
@@ -61,79 +160,215 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"8": {
 		"fish_name": "Puffer Fish",
 		"difficulty": 3,
 		"rarity": 1,
-		"locations": ["ocean"],
+		"locations": [
+			"ocean"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"9": {
 		"fish_name": "Ogre Eel",
 		"difficulty": 3,
 		"rarity": 1,
-		"locations": ["toilet"],
+		"locations": [
+			"toilet"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"10": {
 		"fish_name": "Walleye",
 		"difficulty": 3,
 		"rarity": 0.4,
-		"locations": ["river", "lake"],
+		"locations": [
+			"river",
+			"lake"
+		],
 		"scientific_name": "Sander Vitreus",
-		"description": "A freshwater fish found in North America"
+		"description": "A freshwater fish found in North America",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"11": {
 		"fish_name": "Sea Urchin",
 		"difficulty": 3,
 		"rarity": 1,
-		"locations": ["ocean"],
+		"locations": [
+			"ocean"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"12": {
 		"fish_name": "Plastic Fish with Googly Eyes",
 		"difficulty": 3,
 		"rarity": 0.4,
-		"locations": ["Pool"],
+		"locations": [
+			"pool"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"summer"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon"
+		]
 	},
 	"13": {
 		"fish_name": "A Man in a Fish Costume",
 		"difficulty": 3,
 		"rarity": 0.5,
-		"locations": ["office", "market", "mall"],
+		"locations": [
+			"office",
+			"market",
+			"mall"
+		],
 		"scientific_name": "Homo Sapian Piscis",
-		"description": "It's just a dude, dressed up like a fish. Why'd he bite the line?"
+		"description": "It's just a dude, dressed up like a fish. Why'd he bite the line?",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon"
+		]
 	},
 	"14": {
 		"fish_name": "Lionfish",
 		"difficulty": 3,
 		"rarity": 1,
-		"locations": ["ocean"],
+		"locations": [
+			"ocean"
+		],
 		"scientific_name": "Pterois Volitans",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"15": {
 		"fish_name": "Catphish",
 		"difficulty": 3,
 		"rarity": 0.1,
-		"locations": ["office"],
+		"locations": [
+			"office"
+		],
 		"scientific_name": "Fakeus Emailus",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"16": {
 		"fish_name": "A Living Pot of Fish Stew",
 		"difficulty": 3,
 		"rarity": 0.5,
-		"locations": ["market"],
+		"locations": [
+			"market"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"17": {
 		"fish_name": "Parrot Fish",
@@ -141,7 +376,21 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"18": {
 		"fish_name": "Red Snapper",
@@ -149,15 +398,45 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"19": {
 		"fish_name": "Cheese Carp",
 		"difficulty": 3,
 		"rarity": 0.3,
-		"locations": ["toilet", "pool", "office"],
+		"locations": [
+			"toilet",
+			"pool",
+			"office"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"20": {
 		"fish_name": "Rune Fish",
@@ -165,38 +444,107 @@
 		"rarity": 1,
 		"description": "",
 		"scientific_name": "",
-		"locations": ["river"]
+		"locations": [
+			"river"
+		],
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"21": {
 		"fish_name": "Rubber Ducky",
 		"difficulty": 3,
 		"rarity": 0.1,
-		"locations": ["pool"],
+		"locations": [
+			"pool"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"22": {
 		"fish_name": "Money Fish",
 		"difficulty": 3,
 		"rarity": 1,
-		"locations": ["office"],
+		"locations": [
+			"office"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"23": {
 		"fish_name": "Sturgeon",
 		"difficulty": 3,
 		"rarity": 1,
 		"scientific_name": "",
-		"locations": ["lake"],
-		"description": ""
+		"locations": [
+			"lake"
+		],
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	},
 	"24": {
 		"fish_name": "FRUG",
 		"difficulty": 3,
 		"rarity": 0.3,
-		"locations": ["river"],
+		"locations": [
+			"river"
+		],
 		"scientific_name": "",
-		"description": ""
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	}
 }

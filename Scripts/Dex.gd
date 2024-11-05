@@ -19,10 +19,13 @@ func init_data() -> Dex:
         fish.description = fishNames[index]["description"]
         fish.scientific_name = fishNames[index]["scientific_name"]
         fish.locations = fishNames[index]["locations"]
+        fish.seasons = fishNames[index]["seasons"]
+        fish.time_of_day = fishNames[index]["time_of_day"]
         for location in fishNames[index]["locations"]:
             if not location in locations:
                 locations.append(fishNames[index]["locations"])
         FishData[fishNames[index]] = fish
+
     for location in locations:
         # init location info empty atm. make a json file for location data later and load the fish into it or something
         LocationData[location] = {}
@@ -31,9 +34,12 @@ func init_data() -> Dex:
 func random_fish() -> Fish:
     var selected: int = randi_range(0,len(FishData.keys()) - 1)
     var check_fish: Fish = FishData[FishData.keys()[selected]]
-    #if not check_fish.can_be_caught_now():
+    while not check_fish.can_be_caught_now("evening", "summer", "river"):
+        selected = randi_range(0,len(FishData.keys()) - 1)
+        check_fish = FishData[FishData.keys()[selected]]
         
     tracked_fish = check_fish
+    print(check_fish.fish_name)
     return tracked_fish
 
 func free_fish() -> void:

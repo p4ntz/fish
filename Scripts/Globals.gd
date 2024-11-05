@@ -6,6 +6,8 @@ extends Node
 @export var IsFishing: bool = false
 @export var FishWasCaught: bool = false
 
+@export var SizeDecimalPlaces: float = 0.1
+
 # Array to store fishing locations and their types
 @export var fishing_locations: Array = []
 @export var current_fishing_location: String = ""  # Store the current water body type

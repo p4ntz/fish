@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 class_name Fish
 
 # Basic Information
@@ -16,10 +16,11 @@ class_name Fish
 @export var min_size: float
 @export var max_size: float
 @export var average_size: float
+@export var current_size: float
 @export var size_unit: String = "cm"
 
 # Spawning/Catching Properties
-@export var locations: Array[String] = []
+@export var locations: Array = []
 @export var seasons: Array[String] = ["Spring", "Summer", "Fall", "Winter"]
 @export var time_of_day: Array[String] = ["Morning", "Afternoon", "Evening", "Night"]
 @export var depth_range: Vector2 = Vector2(0.0, 10.0)  # min and max depth
@@ -85,7 +86,7 @@ var last_caught_location: String = ""
  
 # Methods
 func calculate_current_EXP(size: float) -> int:
-	var exp_base = size + (rarity * 10)
+	var exp_base := size + (rarity * 10)
 	
 	# Add difficulty bonus
 	var difficulty_bonus: int
@@ -115,10 +116,10 @@ func calculate_current_EXP(size: float) -> int:
 	
 # Function to randomly determine fish color when caught
 func roll_color_variant() -> void:
-	var total = 0.0
-	var roll = randf() * 100  # Random number between 0 and 100
+	var total := 0.0
+	var roll := randf() * 100  # Random number between 0 and 100
 	
-	for color in color_spawn_chances:
+	for color in color_spawn_chances.keys():
 		total += color_spawn_chances[color]
 		if roll <= total:
 			current_color = color
@@ -134,6 +135,7 @@ func can_be_caught_now(current_time: String, current_season: String) -> bool:
 func record_catch(size: float, location: String) -> void:
 	amount_caught += 1
 	total_weight_caught += size
+	current_size = size
 	if size > largest_caught:
 		largest_caught = size
 	if smallest_caught == 0 or size < smallest_caught:

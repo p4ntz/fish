@@ -30,3 +30,9 @@ texture = ExtResource("2_n4rv7")
 position = Vector2(572, 538)
 scale = Vector2(0.453901, 0.482014)
 texture = ExtResource("3_tae2p")
+
+[node name="FishCaught" type="RichTextLabel" parent="."]
+offset_left = 461.0
+offset_top = 267.0
+offset_right = 690.0
+offset_bottom = 307.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://okyw50n3bdhe"]
 
-[ext_resource type="Script" path="res://Scripts/FishingGame.gd" id="1_xpvtt"]
+[ext_resource type="Script" path="res://Scripts/Scenes/FishingGame.gd" id="1_xpvtt"]
 [ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_xsjkn"]
 [ext_resource type="Texture2D" uid="uid://b8ce423vw1h61" path="res://Sprites/IdleFishingRod.png" id="3_i7wjs"]
 [ext_resource type="Texture2D" uid="uid://m3308gcy5i2i" path="res://Sprites/FishTiredBackground.png" id="4_fkllv"]

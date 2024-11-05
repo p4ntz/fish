@@ -29,7 +29,7 @@ window/per_pixel_transparency/allowed=true
 
 [gui]
 
-theme/custom_font="res://gonefishinggoofy.ttf"
+theme/custom_font="res://Fonts/gonefishinggoofy.ttf"
 theme/default_font_hinting=2
 
 [input]

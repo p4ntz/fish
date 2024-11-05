@@ -9,6 +9,8 @@ var fish_spawn_timer: Timer
 var catch_window_timer: Timer
 var caught_message_timer: Timer
 
+var overlay_layer: CanvasLayer
+
 func _ready():
 	# Hide the active indicator at start
 	indicator_normal.visible = true

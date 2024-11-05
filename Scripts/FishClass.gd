@@ -132,7 +132,9 @@ func get_color_name() -> String:
 func can_be_caught_now(current_time: String, current_season: String, current_location: String) -> bool:
 	var can_catch: bool = true
 
-	if not current_location in locations:
+	var current_fishing_location = Globals.get_current_fishing_location()
+
+	if not current_fishing_location in locations:
 		can_catch = false
 		
 	if not current_time in time_of_day:

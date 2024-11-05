@@ -9,14 +9,13 @@ var initial_size := Vector2()
 var resize_handle_size := 20
 
 var snap_points: Array[Vector2] = [
-	Vector2(50, 650),
-	Vector2(570, 500)
+	Vector2(50, 650),  # Delete point
+	Vector2(570, 500)  # Fishing location point
 ]
-var snap_threshold := 50  # Increase this value for more powerful snapping
+var snap_threshold := 100
 
-# Track z-index for window ordering
 var current_z_index := 0
-static var top_z_index := 0  # Shared across all windows
+static var top_z_index := 0
 
 @onready var panel: Node = get_node("Panel")
 @onready var label: Node = get_node("Panel/Label")
@@ -28,7 +27,6 @@ func _ready():
 	start_window_size = panel.size
 	label.text = "Pond"
 	
-	# Set initial z-index
 	current_z_index = top_z_index
 	z_index = current_z_index
 	top_z_index += 1
@@ -38,8 +36,14 @@ func bring_to_top():
 	current_z_index = top_z_index
 	z_index = current_z_index
 
+func handle_snap_action(snap_index: int):
+	if snap_index == 0:  # First snap point - delete window
+		queue_free()
+	elif snap_index == 1:  # Second snap point - add fishing location
+		Globals.set_current_fishing_location(label.text.to_lower())
+		print("Added fishing location: ", label.text, " at ", snap_points[1])
+
 func _input(event):
-	# Only process input if this window is on top
 	if z_index != top_z_index and (dragging or resizing):
 		dragging = false
 		resizing = false
@@ -48,7 +52,6 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse_pos: Vector2 = event.position - global_position
 		if event.pressed:
-			# Check if clicking in resize handle relative to panel position and size
 			if _is_in_resize_handle(mouse_pos - panel.position):
 				resizing = true
 				dragging = false
@@ -56,7 +59,6 @@ func _input(event):
 				drag_start_pos = event.position
 				bring_to_top()
 			else:
-				# Only drag if clicking on the panel
 				var panel_rect := Rect2(panel.position, panel.size)
 				if panel_rect.has_point(mouse_pos):
 					dragging = true
@@ -65,6 +67,14 @@ func _input(event):
 					start_window_pos = panel.position
 					bring_to_top()
 		else:
+			if dragging:
+				# Check if we're snapped to any point when releasing
+				var global_window_center: Vector2 = global_position + panel.position + (panel.size / 2)
+				for i in snap_points.size():
+					var distance: float = global_window_center.distance_to(snap_points[i])
+					if distance < snap_threshold:
+						handle_snap_action(i)
+						break
 			dragging = false
 			resizing = false
 	
@@ -72,7 +82,6 @@ func _input(event):
 		if dragging:
 			var new_pos: Vector2 = start_window_pos + (event.position - drag_start_pos)
 			
-			# Calculate global position of window center
 			var global_window_center: Vector2 = global_position + new_pos + (panel.size / 2)
 			
 			var closest_snap: Vector2 = Vector2.ZERO
@@ -87,7 +96,6 @@ func _input(event):
 					snapped = true
 			
 			if snapped:
-				# Convert snap point to local coordinates and account for panel center offset
 				var local_snap_pos = closest_snap - global_position - (panel.size / 2)
 				panel.position = local_snap_pos
 			else:
@@ -95,15 +103,12 @@ func _input(event):
 		
 		elif resizing:
 			var new_size: Vector2 = start_window_size + (event.position - drag_start_pos)
-			# Ensure minimum size
 			new_size.x = max(100, new_size.x)
 			new_size.y = max(100, new_size.y)
 			
-			# Update panel size
 			panel.size = new_size
 			_update_label_position()
 			
-			# Update label based on panel size ratios
 			var width_height_ratio: float = panel.size.x / panel.size.y
 			var height_width_ratio: float = panel.size.y / panel.size.x
 			var size_ratio: float = (panel.size.x * panel.size.y) / (initial_size.x * initial_size.y)
@@ -122,13 +127,10 @@ func _input(event):
 		queue_redraw()
 
 func _draw():
-	# Draw snap points
 	for point in snap_points:
-		# Convert snap points to local coordinates for drawing
 		var local_point = point - global_position
 		draw_circle(local_point, 5, Color.RED)
 	
-	# Draw resize handle on panel
 	if panel:
 		var handle_pos = panel.position + panel.size - Vector2(resize_handle_size, resize_handle_size)
 		draw_rect(Rect2(handle_pos, Vector2(resize_handle_size, resize_handle_size)), Color.GRAY)

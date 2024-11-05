@@ -16,6 +16,8 @@ extends Node2D
 @onready var idle_rod_sprites := [$IdleRod]
 @onready var middle_rod_sprites := [$MiddleRodBend]
 
+signal minigame_completed
+
 # Game parameters
 var max_rod_health := 100.0
 var current_rod_health := 100.0
@@ -124,6 +126,11 @@ func handle_active_state(delta):
 			# Wrong direction held - damage fishing rod
 			current_rod_health -= ROD_DAMAGE_RATE * delta
 			#print("Wrong direction - damaging rod!")
+
+	if player_direction == "none":
+		# Slowly damage the rod if no direction is pressed
+		current_rod_health -= ROD_DAMAGE_RATE * delta * 0.25
+		#print("No direction pressed - slowly damaging rod!")
 	
 	# Damage rod if pulling down during active fishing
 	if Input.is_action_pressed("ui_down") and not is_fish_tired:

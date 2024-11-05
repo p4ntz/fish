@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://okyw50n3bdhe"]
+[gd_scene load_steps=9 format=3 uid="uid://okyw50n3bdhe"]
 
 [ext_resource type="Script" path="res://Scripts/FishingGame.gd" id="1_xpvtt"]
 [ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_xsjkn"]
 [ext_resource type="Texture2D" uid="uid://b8ce423vw1h61" path="res://Sprites/IdleFishingRod.png" id="3_i7wjs"]
+[ext_resource type="Texture2D" uid="uid://m3308gcy5i2i" path="res://Sprites/FishTiredBackground.png" id="4_fkllv"]
+[ext_resource type="Texture2D" uid="uid://yuihw0f8xcc1" path="res://Sprites/LosingHealthBackground.png" id="5_y4pbf"]
+[ext_resource type="Texture2D" uid="uid://vpkww05pn4ve" path="res://Sprites/YankingFishBackground.png" id="6_jrfwj"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hg235"]
 load_path = "res://.godot/imported/FishingRodMiddlePull.png-636ebb36a3d29244b64276010f82d44f.ctex"
@@ -49,14 +52,14 @@ scale = Vector2(0.63, 0.5975)
 texture = ExtResource("2_xsjkn")
 flip_h = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="FishTextLabel" type="RichTextLabel" parent="."]
 offset_left = 3.0
 offset_top = 70.0
 offset_right = 95.0
 offset_bottom = 86.0
 text = "Fish Stamina"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RodTextLabel" type="RichTextLabel" parent="."]
 offset_left = 1063.0
 offset_top = 72.0
 offset_right = 1143.0
@@ -95,3 +98,21 @@ scale = Vector2(0.63, 0.5975)
 texture = SubResource("CompressedTexture2D_x5ogo")
 offset = Vector2(200, 350)
 flip_h = true
+
+[node name="FishTiredBackground" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(581.5, 277)
+scale = Vector2(1.50703, 1.47656)
+texture = ExtResource("4_fkllv")
+
+[node name="LosingHealthBackground" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(588.5, 280.5)
+scale = Vector2(1.50391, 1.47949)
+texture = ExtResource("5_y4pbf")
+
+[node name="YankingFishBackground" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(583.5, 279)
+scale = Vector2(1.50703, 1.48438)
+texture = ExtResource("6_jrfwj")

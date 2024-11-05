@@ -4,6 +4,8 @@ extends Node2D
 @onready var rod_health_bar := $RodHealthBar
 @onready var fish_stamina_bar := $FishStaminaBar
 @onready var catch_progress_bar := $CatchProgressBar
+@onready var fish_stamina_bar_label := $FishTextLabel
+@onready var rod_health_bar_label := $RodTextLabel
 
 # Sprite nodes for fish direction indicators
 @onready var left_sprites := [$LeftFish]
@@ -16,6 +18,14 @@ extends Node2D
 @onready var idle_rod_sprites := [$IdleRod]
 @onready var middle_rod_sprites := [$MiddleRodBend]
 
+#background sprites
+@onready var danger_background := $LosingHealthBackground
+@onready var fish_tired_background := $FishTiredBackground
+@onready var yanking_background := $YankingFishBackground
+
+var current_background: Sprite2D = null
+const FADE_DURATION = 0.3
+
 signal minigame_completed
 
 # Game parameters
@@ -24,6 +34,9 @@ var current_rod_health := 100.0
 var max_fish_stamina := 100.0
 var current_fish_stamina := 100.0
 var catch_progress := 0.0
+
+enum Difficulty { EASY, MEDIUM, HARD, EXTREME }
+var catching_difficulty: int = Difficulty.EASY
 
 # Fish state
 var fish_direction := "none"  # "left", "right", or "none"
@@ -62,6 +75,14 @@ func _ready():
 	# Initialize sprites
 	update_direction_sprites("none")
 	update_rod_direction_sprites()
+	
+	# Set initial visibility based on Fisher Level
+	update_bars_visibility()
+	
+	# Hide all backgrounds initially
+	danger_background.modulate.a = 0
+	fish_tired_background.modulate.a = 0
+	yanking_background.modulate.a = 0
 
 func _process(delta):
 	if current_fish_stamina <= 0:
@@ -91,10 +112,22 @@ func _process(delta):
 		print("Fish caught!")
 		Globals.FishWasCaught = true
 		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
+		Globals.gain_experience(100)
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
 		
 	#Update the rod sprite	
 	update_rod_direction_sprites()
+	
+	# Update bars visibility if level changes
+	update_bars_visibility()
+	
+	# Update all bars values
+	if fish_stamina_bar and fish_stamina_bar.visible:
+		fish_stamina_bar.value = current_fish_stamina
+	if rod_health_bar and rod_health_bar.visible:
+		rod_health_bar.value = current_rod_health
+	
+	update_background_state()
 
 func handle_tired_state(delta):
 	is_fish_tired = true
@@ -192,3 +225,72 @@ func update_rod_direction_sprites():
 	
 	for sprite in sprites_to_show:
 		sprite.show()
+
+func update_bars_visibility():
+	# Hide stamina bar unless level > 1
+	if fish_stamina_bar:
+		fish_stamina_bar.visible = Globals.fisher_level > 1
+		fish_stamina_bar_label.visible = Globals.fisher_level > 1
+	
+	# Hide rod health bar unless level > 2 
+	if rod_health_bar:
+		rod_health_bar.visible = Globals.fisher_level > 2
+		rod_health_bar_label.visible = Globals.fisher_level > 2
+
+func fade_to_background(new_background: Sprite2D):
+	if current_background == new_background:
+		return
+		
+	# Fade out current background
+	if current_background:
+		var tween = create_tween()
+		tween.tween_property(current_background, "modulate:a", 0.0, FADE_DURATION)
+	
+	# Fade in new background to 0.5 opacity
+	var tween = create_tween()
+	tween.tween_property(new_background, "modulate:a", 0.5, FADE_DURATION)
+	current_background = new_background
+
+func update_background_state():
+	var player_direction = get_player_direction()
+	
+	if is_fish_tired:
+		fade_to_background(fish_tired_background)
+	elif player_direction == fish_direction:
+		fade_to_background(yanking_background)
+	elif player_direction == "none" or player_direction != fish_direction:
+		fade_to_background(danger_background)
+
+# func calculate_current_EXP(size: float) -> int:
+# 	var exp_base := size
+	
+# 	# Add difficulty bonus
+# 	var difficulty_bonus: int
+# 	match catching_difficulty:
+# 		Difficulty.EASY:
+# 			difficulty_bonus = 1
+# 		Difficulty.MEDIUM:
+# 			difficulty_bonus = 2
+# 		Difficulty.HARD:
+# 			difficulty_bonus = 3
+# 		Difficulty.EXTREME:
+# 			difficulty_bonus = 5
+# 		_:
+# 			difficulty_bonus = 0
+	
+# 	# Add fish-specific difficulty multiplier
+# 	var fish_multiplier: float = 1.0
+# 	match fish.fish.difficulty:
+# 		"easy":
+# 			fish_multiplier = 1.0
+# 		"medium": 
+# 			fish_multiplier = 1.5
+# 		"hard":
+# 			fish_multiplier = 2.0
+# 		"extreme":
+# 			fish_multiplier = 3.0
+	
+# 	# Calculate final EXP
+# 	exp_base = (exp_base + difficulty_bonus * 10) * fish_multiplier
+	
+# 	return int(exp_base)

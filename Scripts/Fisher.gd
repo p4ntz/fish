@@ -3,6 +3,9 @@ extends Node2D
 @onready var indicator_normal: Sprite2D = $Indicator1
 @onready var indicator_active: Sprite2D = $Indicator2
 @onready var fish_caught: RichTextLabel = $FishCaught
+@onready var fisher_stats: Node = $FisherStats
+@onready var level_label: Label = $Level
+@onready var exp_bar: ProgressBar = $EXPBar
 
 # Timers
 var fish_spawn_timer: Timer

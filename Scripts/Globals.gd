@@ -26,3 +26,28 @@ func set_current_fishing_location(water_type: String):
 	
 func get_current_fishing_location() -> String:
 	return current_fishing_location
+
+# Fisher stats
+@export var fisher_level: int = 1
+@export var fisher_experience: int = 0
+@export var fisher_experience_total: int = 0
+@export var fisher_experience_required: int = 0
+
+func _ready():
+	fisher_experience_required = get_required_experience(fisher_level + 1)
+
+func get_required_experience(target_level: int) -> int:
+	return round(pow(target_level, 1.8) + target_level * 4 + 100)
+
+func gain_experience(amount: int) -> void:
+	fisher_experience += amount
+	fisher_experience_total += amount
+	while fisher_experience_total >= fisher_experience_required:
+		fisher_experience -= fisher_experience_required
+		level_up()
+		if fisher_experience < fisher_experience_required:
+			break
+
+func level_up() -> void:
+	fisher_level += 1
+	fisher_experience_required = get_required_experience(fisher_level + 1)

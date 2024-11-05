@@ -7,14 +7,6 @@
 [node name="Game Background Node" type="Node2D"]
 script = ExtResource("1_vpjux")
 
-[node name="Notes" type="Label" parent="."]
-offset_left = 15.0
-offset_top = 8.0
-offset_right = 1138.0
-offset_bottom = 632.0
-text = "This is just some placeholder text, i want this scene to pretty much just be the background, where we can store other scenes like the main fishing game, the FishDex (name pending) and other the other possible screens we want to display for the user."
-autowrap_mode = 3
-
 [node name="Fisher" parent="." instance=ExtResource("1_wa21t")]
 
 [node name="Pond" type="Button" parent="."]
@@ -29,5 +21,19 @@ text = "pond"
 position = Vector2(53, 662)
 scale = Vector2(0.147826, 0.147826)
 texture = ExtResource("3_bwfql")
+
+[node name="Season" type="Label" parent="."]
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 212.0
+offset_bottom = 25.0
+text = "Add the current season here"
+
+[node name="Time" type="Label" parent="."]
+offset_left = 12.0
+offset_top = 28.0
+offset_right = 192.0
+offset_bottom = 47.0
+text = "Add the current time here"
 
 [connection signal="pressed" from="Pond" to="." method="_on_pond_pressed"]

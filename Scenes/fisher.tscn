@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://buad1dyyyy7aw"]
 
-[ext_resource type="Script" path="res://Scripts/Fisher.gd" id="1_4qm21"]
+[ext_resource type="Script" path="res://Scripts/Scenes/Fisher.gd" id="1_4qm21"]
 [ext_resource type="Texture2D" uid="uid://1rai4xu0bm1u" path="res://Sprites/Fisher.png" id="1_ieamg"]
 [ext_resource type="Texture2D" uid="uid://dk0pai61bsa1k" path="res://Sprites/FisherAbove1.png" id="2_n4rv7"]
 [ext_resource type="Script" path="res://Scripts/Music/Fisher_waiting_music.gd" id="3_065n4"]
 [ext_resource type="Texture2D" uid="uid://dhakhv7yq24cm" path="res://Sprites/FisherAbove2.png" id="3_tae2p"]
-[ext_resource type="Script" path="res://Scripts/exp_bar.gd" id="7_8n4rg"]
-[ext_resource type="Script" path="res://Scripts/Level.gd" id="7_f7ody"]
-[ext_resource type="Script" path="res://Scripts/current_exp.gd" id="8_eosvr"]
-[ext_resource type="Script" path="res://Scripts/required_exp.gd" id="9_3qt75"]
+[ext_resource type="Script" path="res://Scripts/Logic/exp_bar.gd" id="7_8n4rg"]
+[ext_resource type="Script" path="res://Scripts/Logic/Level.gd" id="7_f7ody"]
+[ext_resource type="Script" path="res://Scripts/Logic/current_exp.gd" id="8_eosvr"]
+[ext_resource type="Script" path="res://Scripts/Logic/required_exp.gd" id="9_3qt75"]
 
 [node name="Fisher" type="Node2D"]
 script = ExtResource("1_4qm21")

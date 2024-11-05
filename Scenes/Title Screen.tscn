@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8vs5ifvkuo7o"]
 
-[ext_resource type="Script" path="res://Scripts/new_game_button.gd" id="1_dyww7"]
-[ext_resource type="Script" path="res://Scripts/MinResizeWindow.gd" id="1_whoat"]
-[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="2_5xfiu"]
+[ext_resource type="Script" path="res://Scripts/Scenes/new_game_button.gd" id="1_dyww7"]
+[ext_resource type="Script" path="res://Scripts/Logic/MinResizeWindow.gd" id="1_whoat"]
+[ext_resource type="Script" path="res://Scripts/Scenes/quit_button.gd" id="2_5xfiu"]
 [ext_resource type="Script" path="res://Scripts/Music/title_music.gd" id="2_akphk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mw1bu"]

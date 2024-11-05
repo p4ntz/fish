@@ -24,7 +24,7 @@ extends Node2D
 @onready var yanking_background := $YankingFishBackground
 
 var current_background: Sprite2D = null
-const FADE_DURATION = 0.3
+const FADE_DURATION := 0.3
 
 signal minigame_completed
 
@@ -237,22 +237,22 @@ func update_bars_visibility():
 		rod_health_bar.visible = Globals.fisher_level > 2
 		rod_health_bar_label.visible = Globals.fisher_level > 2
 
-func fade_to_background(new_background: Sprite2D):
+func fade_to_background(new_background: Sprite2D) -> void:
 	if current_background == new_background:
 		return
 		
 	# Fade out current background
 	if current_background:
-		var tween = create_tween()
+		var tween := create_tween()
 		tween.tween_property(current_background, "modulate:a", 0.0, FADE_DURATION)
 	
 	# Fade in new background to 0.5 opacity
-	var tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(new_background, "modulate:a", 0.5, FADE_DURATION)
 	current_background = new_background
 
 func update_background_state():
-	var player_direction = get_player_direction()
+	var player_direction := get_player_direction()
 	
 	if is_fish_tired:
 		fade_to_background(fish_tired_background)

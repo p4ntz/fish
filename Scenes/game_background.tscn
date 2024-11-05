@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4n33w5u131ad"]
+[gd_scene load_steps=3 format=3 uid="uid://b4n33w5u131ad"]
 
+[ext_resource type="Script" path="res://Scenes/WindowSpawn.gd" id="1_vpjux"]
 [ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://Scenes/fisher.tscn" id="1_wa21t"]
 
 [node name="Game Background Node" type="Node2D"]
+script = ExtResource("1_vpjux")
 
 [node name="Notes" type="Label" parent="."]
 offset_left = 15.0
@@ -13,3 +15,13 @@ text = "This is just some placeholder text, i want this scene to pretty much jus
 autowrap_mode = 3
 
 [node name="Fisher" parent="." instance=ExtResource("1_wa21t")]
+
+[node name="Pond" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1139.0
+offset_top = 690.0
+offset_right = 1279.0
+offset_bottom = 721.0
+text = "pond"
+
+[connection signal="pressed" from="Pond" to="." method="_on_pond_pressed"]

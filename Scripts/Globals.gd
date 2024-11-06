@@ -66,5 +66,18 @@ func level_up() -> void:
 @export var fish_held_catch_rate: float = 12
 @export var base_fish_stamina_drain: float = 50
 
+# Seasons
+const SEASONS: Array = ["Spring", "Summer", "Fall", "Winter"]
+@export var current_season: String = ""
 
+func set_current_season(season: String): 
+	current_season=season
+	print("Season has changed to: ", current_season)
 
+# Time of Day
+const TIMES_OF_DAY: Array = ["Morning", "Afternoon", "Evening", "Night"]
+@export var current_time_of_day: String = ""
+
+func set_current_time_of_day(time_of_day: String):
+	current_time_of_day=time_of_day
+	print("Time of day has changed to: ", current_time_of_day)

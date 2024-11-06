@@ -22,89 +22,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource("1_whoat")
 
-[node name="Title" type="Label" parent="CanvasLayer/Control"]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -140.0
-offset_right = 109.0
-offset_bottom = -20.0
+offset_left = -150.0
+offset_top = -144.5
+offset_right = 150.0
+offset_bottom = 144.5
 grow_horizontal = 2
 grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/BoxContainer"]
+custom_minimum_size = Vector2(218, 130)
+layout_mode = 2
+size_flags_vertical = 10
 text = "fish."
 label_settings = SubResource("LabelSettings_mw1bu")
 horizontal_alignment = 1
 script = ExtResource("2_akphk")
 
-[node name="LoadGameButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -15.5
-offset_right = 52.0
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="LoadGameButton" type="Button" parent="CanvasLayer/Control/BoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
 text = "Load Game"
 
-[node name="NewGameButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 34.5
-offset_right = 52.0
-offset_bottom = 64.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NewGameButton" type="Button" parent="CanvasLayer/Control/BoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
 text = "New Game"
 script = ExtResource("1_dyww7")
 
-[node name="SettingsButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 84.5
-offset_right = 52.0
-offset_bottom = 114.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SettingsButton" type="Button" parent="CanvasLayer/Control/BoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 134.5
-offset_right = 52.0
-offset_bottom = 164.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control/BoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
 text = "Quit"
 script = ExtResource("2_5xfiu")
 
-[connection signal="pressed" from="CanvasLayer/Control/NewGameButton" to="CanvasLayer/Control/NewGameButton" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/QuitButton" to="CanvasLayer/Control/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/BoxContainer/VBoxContainer/NewGameButton" to="CanvasLayer/Control/BoxContainer/VBoxContainer/NewGameButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/BoxContainer/VBoxContainer/QuitButton" to="CanvasLayer/Control/BoxContainer/VBoxContainer/QuitButton" method="_on_pressed"]

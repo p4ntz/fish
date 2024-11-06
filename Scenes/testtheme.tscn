@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dsuv5jn8a58b4"]
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HScrollBar" type="HScrollBar" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VScrollBar" type="VScrollBar" parent="CanvasLayer"]
+custom_minimum_size = Vector2(20, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Window" type="Window" parent="."]
+transparent_bg = true
+title = "Gutscha Catch Them All"
+position = Vector2i(0, 36)
+size = Vector2i(400, 400)
+min_size = Vector2i(400, 400)
+keep_title_visible = true
+
+[node name="TextEdit" type="TextEdit" parent="Window"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+placeholder_text = "Gill Finly"
+wrap_mode = 1
+
+[node name="SpinBox" type="SpinBox" parent="Window"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 32.0
+offset_right = -128.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Window"]
+offset_top = 64.0
+offset_right = 67.0
+offset_bottom = 80.0
+text = "Testing :)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Window"]
+offset_top = 96.0
+offset_right = 73.0
+offset_bottom = 120.0
+text = "Press Me"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.607843, 0.737255, 0.0588235, 1)

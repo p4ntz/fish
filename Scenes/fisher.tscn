@@ -13,14 +13,6 @@
 [node name="Fisher" type="Node2D"]
 script = ExtResource("1_4qm21")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 788.0
-offset_top = 406.0
-offset_right = 1052.0
-offset_bottom = 585.0
-text = "Add the fishmman sprite here, and we will need some basic animations, i am thinking a basic idle animation, a basic fish hooked animation, a struggling to catch fish animation and a fish caught animation."
-autowrap_mode = 3
-
 [node name="FisherSprite" type="Sprite2D" parent="."]
 position = Vector2(572, 611)
 scale = Vector2(0.532374, 0.532374)

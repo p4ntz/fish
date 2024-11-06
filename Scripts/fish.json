@@ -673,26 +673,5 @@
 		"time_of_day": [
 			"night"
 		]
-	},
-	"31": {
-    	"fish_name": "Winter Ghost",
-    	"difficulty": 2,
-    	"rarity": 0.2,
-    	"locations": ["pond"],
-    	"seasons": ["winter"]
-	},
-	"32": {
-    	"fish_name": "Mystery Fish",
-    	"difficulty": 3,
-    	"locations": ["pond"],
-    	"seasons": ["summer", "fall"],
-    	"time_of_day": ["morning"]
-	},
-	"33": {
-    	"fish_name": "Unnamed Species",
-    	"rarity": 0.5,
-    	"locations": ["pond"],
-    	"seasons": ["spring"],
-    	"time_of_day": ["evening"]
 	}
 }

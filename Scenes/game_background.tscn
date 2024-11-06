@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4n33w5u131ad"]
+[gd_scene load_steps=7 format=3 uid="uid://b4n33w5u131ad"]
 
 [ext_resource type="Script" path="res://Scripts/Logic/WaterWindowSpawn.gd" id="1_vpjux"]
 [ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://Scenes/fisher.tscn" id="1_wa21t"]
 [ext_resource type="Texture2D" uid="uid://b6bak02dp7j1e" path="res://Sprites/Trash.png" id="3_bwfql"]
 [ext_resource type="Script" path="res://Scripts/Logic/pond_button.gd" id="3_q5j8n"]
-[ext_resource type="Script" path="res://Scripts/Logic/gutscha_button.gd" id="4_8bomr"]
 [ext_resource type="Script" path="res://Scripts/Scenes/pond_tutorial.gd" id="5_npxem"]
 [ext_resource type="Script" path="res://Scripts/Scenes/catching_tutorial.gd" id="6_fp04f"]
 
@@ -22,34 +21,10 @@ offset_bottom = 721.0
 text = "pond"
 script = ExtResource("3_q5j8n")
 
-[node name="Gutscha" type="Button" parent="."]
-unique_name_in_owner = true
-offset_left = 997.0
-offset_top = 690.0
-offset_right = 1137.0
-offset_bottom = 721.0
-action_mode = 0
-text = "Gutscha"
-script = ExtResource("4_8bomr")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(53, 662)
 scale = Vector2(0.147826, 0.147826)
 texture = ExtResource("3_bwfql")
-
-[node name="Season" type="Label" parent="."]
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 212.0
-offset_bottom = 25.0
-text = "Add the current season here"
-
-[node name="Time" type="Label" parent="."]
-offset_left = 12.0
-offset_top = 28.0
-offset_right = 192.0
-offset_bottom = 47.0
-text = "Add the current time here"
 
 [node name="PondTutorial" type="RichTextLabel" parent="."]
 offset_left = 1048.0
@@ -70,4 +45,3 @@ When you hook a fish, press start to start reeling it in!"
 script = ExtResource("6_fp04f")
 
 [connection signal="pressed" from="Pond" to="." method="_on_pond_pressed"]
-[connection signal="pressed" from="Gutscha" to="Gutscha" method="_on_pressed"]

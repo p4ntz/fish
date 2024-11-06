@@ -21,25 +21,84 @@ func add_fishing_location(location: Vector2, water_type: String):
 		"type": water_type
 	})
 	print("Added new fishing location: ", water_type, " at ", location)
-	
+
 func get_fishing_locations() -> Array:
 	return fishing_locations
-	
+
 func set_current_fishing_location(water_type: String):
 	current_fishing_location = water_type
 	print("Now fishing in: ", current_fishing_location)
-	var location_exists = false
-	for location in fishing_locations:
-		if location["type"] == water_type:
-			location_exists = true
-			total_locations_discovered += 1
-			print("Total locations discovered: ", total_locations_discovered)
-			break
+	var location_exists := false
+	if not water_type in fishing_locations:
+		location_exists = true
+		total_locations_discovered += 1
+		fishing_locations.append(water_type)
+		print("Total locations discovered: ", total_locations_discovered)
 	if not location_exists:
 		add_fishing_location(Vector2.ZERO, water_type)
-	
+
 func get_current_fishing_location() -> String:
 	return current_fishing_location
+
+# season and time code
+var time_timer: Timer
+var season_timer: Timer
+@export var current_season: String = "spring"
+var current_season_val: int = 0
+var ttime: float = 0.0
+@export var season_switch: int = 60
+@export var current_time: String = "morning"
+var current_time_val: int = 0
+var stime: float = 0.0
+@export var time_switch: int = 60
+
+enum Seasons {
+	SPRING,
+	SUMMER,
+	FALL,
+	WINTER
+}
+
+enum Times {
+	MORNING,
+	AFTERNOON,
+	EVENING,
+	NIGHT
+}
+
+func update_time() -> void:
+	current_time_val += 1
+	if current_time_val == 5:
+		current_time_val = 0
+	print(current_time_val)
+	match current_time_val:
+		Times.MORNING:
+			current_time = "morning"
+		Times.AFTERNOON:
+			current_time = "afternoon"
+		Times.EVENING:
+			current_time = "evening"
+		Times.NIGHT:
+			current_time = "night"
+	time_timer.start(time_switch)
+	return
+
+func update_season() -> void:
+	current_season_val += 1
+	if current_season_val == 5:
+		current_season_val = 1
+	print(current_season_val)
+	match current_season_val:
+		Seasons.SPRING:
+			current_season = "spring"
+		Seasons.SUMMER:
+			current_season = "summer"
+		Seasons.FALL:
+			current_season = "fall"
+		Seasons.WINTER:
+			current_season = "winter"
+	season_timer.start(season_switch)
+	return
 
 # Fisher stats
 @export var fisher_level: int = 1
@@ -49,6 +108,20 @@ func get_current_fishing_location() -> String:
 
 func _ready():
 	fisher_experience_required = get_required_experience(fisher_level + 1)
+	
+	# Time progression
+	time_timer = Timer.new()
+	time_timer.one_shot = true
+	time_timer.timeout.connect(update_time)
+	add_child(time_timer)
+	time_timer.start(time_switch)
+	
+	# Season progression
+	season_timer = Timer.new()
+	season_timer.one_shot = true
+	season_timer.timeout.connect(update_season)
+	add_child(season_timer)
+	season_timer.start(season_switch)
 
 func get_required_experience(target_level: int) -> int:
 	return round(pow(target_level, 1.8) + target_level * 4 + 100)

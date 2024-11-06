@@ -10,9 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Logic/current_exp.gd" id="8_eosvr"]
 [ext_resource type="Script" path="res://Scripts/Logic/required_exp.gd" id="9_3qt75"]
 [ext_resource type="Script" path="res://Scripts/SFX/hooked_sfx.gd" id="10_0todo"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cihsb"]
-load_path = "res://.godot/imported/hooked.png-f938d144efce626fcb897de216618f6b.ctex"
+[ext_resource type="Texture2D" uid="uid://bwtjcgps2taq" path="res://Sprites/hooked.png" id="10_mxvva"]
 
 [node name="Fisher" type="Node2D"]
 script = ExtResource("1_4qm21")
@@ -88,5 +86,5 @@ text = "Time: "
 [node name="HookedSprite" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(618, 284)
-texture = SubResource("CompressedTexture2D_cihsb")
+texture = ExtResource("10_mxvva")
 script = ExtResource("10_0todo")

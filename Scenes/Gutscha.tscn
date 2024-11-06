@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2qjo1f4rl1s4"]
+[gd_scene load_steps=4 format=3 uid="uid://dskpgrfbonfrr"]
 
 [ext_resource type="Script" path="res://Scripts/Logic/MinResizeWindow.gd" id="1_4p1ds"]
 [ext_resource type="Script" path="res://Scripts/Gutscha.gd" id="1_b4o6n"]

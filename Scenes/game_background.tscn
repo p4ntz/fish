@@ -19,6 +19,7 @@ offset_left = 1139.0
 offset_top = 690.0
 offset_right = 1279.0
 offset_bottom = 721.0
+focus_mode = 0
 text = "pond"
 script = ExtResource("3_q5j8n")
 
@@ -28,6 +29,7 @@ offset_left = 997.0
 offset_top = 690.0
 offset_right = 1137.0
 offset_bottom = 721.0
+focus_mode = 0
 action_mode = 0
 text = "Gutscha"
 script = ExtResource("4_8bomr")

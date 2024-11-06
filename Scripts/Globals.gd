@@ -11,7 +11,7 @@ extends Node
 
 # Array to store fishing locations and their types
 @export var fishing_locations: Array = []
-@export var current_fishing_location: String = ""  # Store the current water body type
+@export var current_fishing_location: String = "air"  # Store the current water body type
 
 func add_fishing_location(location: Vector2, water_type: String):
 	fishing_locations.append({

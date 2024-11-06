@@ -34,7 +34,7 @@ func init_data() -> Dex:
 func random_fish() -> Fish:
 	var selected: int = randi_range(0,len(FishData.keys()) - 1)
 	var check_fish: Fish = FishData[FishData.keys()[selected]]
-	while not check_fish.can_be_caught_now(Globals.current_time, Globals.current_season, Globals.current_fishing_location):
+	while not check_fish.can_be_caught_now("evening", "summer", "river"):
 		selected = randi_range(0,len(FishData.keys()) - 1)
 		check_fish = FishData[FishData.keys()[selected]]
 		

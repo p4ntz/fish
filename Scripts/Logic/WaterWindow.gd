@@ -113,19 +113,13 @@ func _input(event) -> void:
 				var width_height_ratio: float = panel.size.x / panel.size.y
 				var height_width_ratio: float = panel.size.y / panel.size.x
 				var size_ratio: float = (panel.size.x * panel.size.y) / (initial_size.x * initial_size.y)
-
+				
 				if width_height_ratio >= 4.0:
 					label.text = "River"
 				elif panel.size >= get_viewport().get_visible_rect().size:
 					label.text = "Ocean"
 				elif height_width_ratio >= 4.0:
 					label.text = "Waterfall"
-				elif size_ratio >= 2.0:
-					label.text = "Lake"
-				elif size_ratio <= 0.5:
-					label.text = "Puddle"
-				else:
-					label.text = "Pond" 
 			else:
 				resizing = false  # Cancel resize attempt if not enough fish discovered
 		

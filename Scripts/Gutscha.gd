@@ -9,14 +9,14 @@ var pity_max : int
 var pity : int
 var pity_bar : Node = null
 var prize_pool : Array = [
-						 "Super Rare",
-						 "Super Fishy Rare",
-						 "Super Super Rare",
-						 "Super Super Fishy Rare"
-						 ]
+	"Super Rare", 
+	"Super Fishy Rare", 
+	"Super Super Rare", 
+	"Super Super Fishy Rare"
+]
 
-func _ready():
-	var single_gut := get_node("CanvasLayer/Control/HBoxContainer/Gutting/SingleGut")
+func _ready() -> void:
+	var single_gut = get_node("CanvasLayer/Control/HBoxContainer/Gutting/SingleGut")
 	multi_gut = get_node("CanvasLayer/Control/HBoxContainer/Gutting/MultiGut")
 	pity_bar = get_node("CanvasLayer/Control/HBoxContainer/PityAndBanners/ProgressBar")
 	multi_bonus = get_node("CanvasLayer/Control/HBoxContainer/Gutting/MultiBonus")
@@ -48,16 +48,16 @@ func gut_prize() -> String:
 	if pity>=pity_max:
 		_reset_pity()
 		return "You are the best fish in the sea."
-	var prizes :=[
-			   "Your jokes always leave me reeling.",
-			   "You always know how to hook my attention.",
-			   "You're a real catch.",
-			   "I wouldn't gut you even if you were rainbow!",
-			   "You're my favorite member of life's cast.",
-			   "You're fin-ny.",
-			   "You've got guts!",
-			   "Let's play Go-Fish together!"
-			   ]
+	var prizes : Array = [
+		"Your jokes always leave me reeling.",
+		"You always know how to hook my attention.",
+		"You're a real catch.",
+		"I wouldn't gut you even if you were rainbow!",
+		"You're my favorite member of life's cast.",
+		"You're fin-ny.",
+		"You've got guts!",
+		"Let's play Go-Fish together!"
+	]
 	_set_pity()
 	return prizes.pick_random()
 

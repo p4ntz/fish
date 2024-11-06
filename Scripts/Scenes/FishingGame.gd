@@ -29,10 +29,15 @@ const FADE_DURATION := 0.3
 signal minigame_completed
 
 # Game parameters
-var max_rod_health := 100.0
-var current_rod_health := 100.0
-var max_fish_stamina := 100.0
-var current_fish_stamina := 100.0
+var max_rod_health: float = Globals.maximum_rod_health
+var current_rod_health: float = Globals.maximum_rod_health
+var max_fish_stamina: float = Globals.base_fish_stamina
+var current_fish_stamina: float = Globals.base_fish_stamina
+var fish_turn_speed: float = Globals.base_fish_turn_speed
+var fish_recovery_speed: float = Globals.base_fish_recovery_speed
+var rod_damage_rate: float = Globals.rod_damage_rate
+var fish_catch_rate: float = Globals.fish_catch_rate
+var fish_held_catch_rate: float = Globals.fish_held_catch_rate
 var catch_progress := 0.0
 
 enum Difficulty { EASY, MEDIUM, HARD, EXTREME }
@@ -43,11 +48,34 @@ var fish_direction := "none"  # "left", "right", or "none"
 var direction_timer: Timer
 var is_fish_tired := false
 
-# Constants for balance tuning
-const STAMINA_DRAIN_RATE := 30.0
-const ROD_DAMAGE_RATE := 40.0
-const BASE_CATCH_RATE := 4
-const HELD_CATCH_MULTIPLIER := 5.0
+# Difficulty multipliers
+const STAMINA_MULTIPLIERS = {
+	Difficulty.EASY: 0.6,
+	Difficulty.MEDIUM: 0.45,
+	Difficulty.HARD: 0.3,
+	Difficulty.EXTREME: 0.15
+}
+
+const ROD_DAMAGE_MULTIPLIERS = {
+	Difficulty.EASY: 0.2,
+	Difficulty.MEDIUM: 0.4,
+	Difficulty.HARD: 0.6,
+	Difficulty.EXTREME: 0.8
+}
+
+const CATCH_RATE_MULTIPLIERS = {
+	Difficulty.EASY: 8.0,
+	Difficulty.MEDIUM: 4.0,
+	Difficulty.HARD: 2.0,
+	Difficulty.EXTREME: 1.0
+}
+
+const HELD_CATCH_MULTIPLIERS = {
+	Difficulty.EASY: 8.0,
+	Difficulty.MEDIUM: 5.0,
+	Difficulty.HARD: 3.0,
+	Difficulty.EXTREME: 2.0
+}
 
 func _ready():
 	# get a random fish!
@@ -65,10 +93,19 @@ func _ready():
 	catch_progress_bar.max_value = 100
 	catch_progress_bar.value = catch_progress
 	
-	# Setup direction timer
+	# Setup direction timer with difficulty-based timing
 	direction_timer = Timer.new()
 	add_child(direction_timer)
-	direction_timer.wait_time = 1.0
+	var tracked_fish: Fish = Globals.DexInstance.tracked_fish
+	match tracked_fish.catching_difficulty:
+		Difficulty.EASY:
+			direction_timer.wait_time = 1.5
+		Difficulty.MEDIUM:
+			direction_timer.wait_time = 1.0
+		Difficulty.HARD:
+			direction_timer.wait_time = 0.5
+		Difficulty.EXTREME:
+			direction_timer.wait_time = 0.25
 	direction_timer.timeout.connect(change_fish_direction)
 	direction_timer.start()
 	
@@ -98,9 +135,9 @@ func _process(delta):
 		handle_active_state(delta)
 		
 	# Always increase catch progress
-	var catch_rate := BASE_CATCH_RATE
+	var catch_rate: float = fish_catch_rate
 	if Input.is_action_pressed("ui_down"):
-		catch_rate *= HELD_CATCH_MULTIPLIER
+		catch_rate *= HELD_CATCH_MULTIPLIERS[Globals.DexInstance.tracked_fish.catching_difficulty]
 	catch_progress += catch_rate * delta
 	
 	# Update all bars
@@ -112,7 +149,7 @@ func _process(delta):
 		print("Fish caught!")
 		Globals.FishWasCaught = true
 		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
-		Globals.gain_experience(100)
+		Globals.gain_experience(calculate_current_EXP(randf() * 1000))
 		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
 		
 	#Update the rod sprite	
@@ -135,9 +172,19 @@ func handle_tired_state(delta):
 	fish_direction = "none"  # No direction when tired
 	update_direction_sprites("none")  # Update sprites to "neutral"
 	
-	# Restore stamina at the same rate it was drained
-	current_fish_stamina += abs(STAMINA_DRAIN_RATE * delta)
-	#print("Restoring stamina: ", current_fish_stamina)
+	# Restore stamina at different rates based on difficulty
+	var restore_rate := 0.0
+	match Globals.DexInstance.tracked_fish.catching_difficulty:
+		Difficulty.EASY:
+			restore_rate = fish_recovery_speed * 0.5
+		Difficulty.MEDIUM:
+			restore_rate = fish_recovery_speed * 1.0
+		Difficulty.HARD:
+			restore_rate = fish_recovery_speed * 1.5
+		Difficulty.EXTREME:
+			restore_rate = fish_recovery_speed * 2.0
+	
+	current_fish_stamina += restore_rate * delta
 	
 	# Cap stamina at the maximum value
 	if current_fish_stamina >= max_fish_stamina:
@@ -153,21 +200,23 @@ func handle_active_state(delta):
 	if player_direction != "none":
 		if player_direction == fish_direction:
 			# Correct direction held - drain fish stamina
-			current_fish_stamina -= STAMINA_DRAIN_RATE * delta
+			# Use base fish stamina drain rate multiplied by difficulty modifier
+			current_fish_stamina -= (Globals.base_fish_stamina_drain * STAMINA_MULTIPLIERS[Globals.DexInstance.tracked_fish.catching_difficulty]) * delta
 			#print("Good pull!")
 		else:
 			# Wrong direction held - damage fishing rod
-			current_rod_health -= ROD_DAMAGE_RATE * delta
+			# Use base rod damage rate multiplied by difficulty modifier
+			current_rod_health -= (rod_damage_rate * ROD_DAMAGE_MULTIPLIERS[Globals.DexInstance.tracked_fish.catching_difficulty]) * delta
 			#print("Wrong direction - damaging rod!")
 
 	if player_direction == "none":
-		# Slowly damage the rod if no direction is pressed
-		current_rod_health -= ROD_DAMAGE_RATE * delta * 0.25
+		# Slowly damage the rod if no direction is pressed (25% of normal damage)
+		current_rod_health -= (rod_damage_rate * ROD_DAMAGE_MULTIPLIERS[Globals.DexInstance.tracked_fish.catching_difficulty] * 0.25) * delta
 		#print("No direction pressed - slowly damaging rod!")
 	
 	# Damage rod if pulling down during active fishing
 	if Input.is_action_pressed("ui_down") and not is_fish_tired:
-		current_rod_health -= ROD_DAMAGE_RATE * delta
+		current_rod_health -= (rod_damage_rate * ROD_DAMAGE_MULTIPLIERS[Globals.DexInstance.tracked_fish.catching_difficulty]) * delta
 		#print("Down pressed - damaging rod!")
 	
 	# Check for rod break

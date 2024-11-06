@@ -54,3 +54,16 @@ func gain_experience(amount: int) -> void:
 func level_up() -> void:
 	fisher_level += 1
 	fisher_experience_required = get_required_experience(fisher_level + 1)
+
+# fish game Stats
+@export var maximum_rod_health: float = 200
+@export var base_fish_stamina: float = 100
+@export var base_fish_turn_speed: float = 1
+@export var base_fish_recovery_speed: float = 50
+@export var rod_damage_rate: float = 50
+@export var fish_catch_rate: float = 10
+@export var fish_held_catch_rate: float = 12
+@export var base_fish_stamina_drain: float = 50
+
+
+

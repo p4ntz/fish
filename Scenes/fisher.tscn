@@ -44,10 +44,11 @@ offset_right = 690.0
 offset_bottom = 307.0
 
 [node name="Level" type="Label" parent="."]
-offset_left = 820.0
-offset_top = 30.0
-offset_right = 871.0
-offset_bottom = 51.0
+offset_left = 575.0
+offset_top = 6.0
+offset_right = 626.0
+offset_bottom = 29.0
+horizontal_alignment = 1
 script = ExtResource("7_f7ody")
 
 [node name="EXPBar" type="ProgressBar" parent="."]
@@ -66,6 +67,7 @@ offset_bottom = 19.0
 script = ExtResource("8_eosvr")
 
 [node name="RequiredEXP" type="Label" parent="EXPBar"]
+layout_mode = 0
 offset_left = 371.0
 offset_top = 2.0
 offset_right = 411.0

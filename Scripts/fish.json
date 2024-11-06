@@ -673,5 +673,42 @@
 		"time_of_day": [
 			"night"
 		]
+	},
+	"31": {
+		"fish_name": "Stringfish",
+		"difficulty": 3,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+
+			"winter"
+		],
+		"time_of_day": [
+			"morning"
+		]
+	},
+	"32": {
+		"fish_name": "Trout",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall"
+		],
+		"time_of_day": [
+			"afternoon",
+			"evening",
+			"night"
+		]
 	}
 }

@@ -3,6 +3,9 @@ extends Node2D
 @onready var indicator_normal: Sprite2D = $Indicator1
 @onready var indicator_active: Sprite2D = $Indicator2
 @onready var fish_caught: RichTextLabel = $FishCaught
+#@onready var fisher_stats: Node = $FisherStats
+@onready var level_label: Label = $Level
+@onready var exp_bar: ProgressBar = $EXPBar
 
 # Timers
 var fish_spawn_timer: Timer
@@ -41,7 +44,7 @@ func _ready():
 	if Globals.IsFishing:
 		if Globals.FishWasCaught:
 			var format_string := "Caught a {name}! It's about {size}{size_unit}!"
-			fish_caught.text = format_string.format({"name":Globals.DexInstance.tracked_fish.fish_name, "size": Globals.DexInstance.tracked_fish.current_size, "size_unit": Globals.DexInstance.tracked_fish.size_unit})
+			fish_caught.text = format_string.format({"name":Globals.DexInstance.tracked_fish.fish_name, "size": snapped(Globals.DexInstance.tracked_fish.current_size,Globals.SizeDecimalPlaces), "size_unit": Globals.DexInstance.tracked_fish.size_unit})
 		else:
 			fish_caught.text = "Looks like that one got away!"
 		# Clean up state.

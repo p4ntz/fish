@@ -546,5 +546,27 @@
 			"evening",
 			"night"
 		]
+	},
+	"25": {
+		"fish_name": "Airfish",
+		"difficulty": 1,
+		"rarity": 0,
+		"locations": [ 
+			"air"
+		],
+		"scientific_name": "Airus Fishus",
+		"description": "Maybe fish in water next time",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
 	}
 }

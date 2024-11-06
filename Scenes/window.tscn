@@ -38,6 +38,7 @@ text = "x"
 
 [node name="WindowContent" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 0
 offset_left = 2.0
 offset_top = 32.0
 offset_right = 690.0
@@ -46,6 +47,7 @@ offset_bottom = 331.0
 [node name="ResizeHandle" type="Control" parent="."]
 light_mask = 129
 layout_mode = 1
+anchors_preset = 0
 offset_left = -86.0
 offset_top = -81.0
 offset_right = -46.0

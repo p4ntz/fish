@@ -157,3 +157,9 @@ func level_up() -> void:
 @export var total_fish_caught_active: int = 0
 @export var total_locations_discovered: int = 0
 @export var total_fish_dex_entries: int = 0
+
+# palette
+@export var color_lightest: Color = Color.html("#9bbc0f")
+@export var color_light: Color = Color.html("#8bac0f")
+@export var color_dark: Color = Color.html("#306230")
+@export var color_darkest: Color = Color.html("#0f380f")

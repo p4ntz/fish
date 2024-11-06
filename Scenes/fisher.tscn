@@ -32,10 +32,10 @@ scale = Vector2(0.453901, 0.482014)
 texture = ExtResource("3_tae2p")
 
 [node name="FishCaught" type="RichTextLabel" parent="."]
-offset_left = 461.0
-offset_top = 267.0
-offset_right = 690.0
-offset_bottom = 307.0
+offset_left = 10.0
+offset_top = 591.0
+offset_right = 239.0
+offset_bottom = 631.0
 
 [node name="Level" type="Label" parent="."]
 offset_left = 575.0

@@ -108,9 +108,24 @@ func is_click_in_area(click_pos: Vector2) -> bool:
 func try_catch_fish():
 	if indicator_active.visible:
 		print("fish. start!")
+		# Stop both timers
 		catch_window_timer.stop()
-		Globals.IsFishing = true
-		get_tree().change_scene_to_file("res://Scenes/fishing.tscn")
+		fish_spawn_timer.stop()
+		
+		var window_scene = preload("res://Scenes/window.tscn")
+		var window = window_scene.instantiate()
+		add_child(window)
+		window.load_scene("res://Scenes/fishing.tscn", "Fishing")
+		indicator_normal.visible = true
+		indicator_active.visible = false
+
+		# Connect the window_closed signal to a method in this scene
+		window.connect("window_closed", Callable(self, "_on_fishing_window_closed"))
+
+func _on_fishing_window_closed():
+	print("fishing window closed")
+	if not fish_spawn_timer.time_left > 0:
+		start_fish_timer()
 
 func _process(delta: float) -> void:
 	var TimeText: String = "Time of Day: {time}"

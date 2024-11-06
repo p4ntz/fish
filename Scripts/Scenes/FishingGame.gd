@@ -1,29 +1,30 @@
 extends Node2D
 
 # Bar nodes
-@onready var rod_health_bar := $RodHealthBar
-@onready var fish_stamina_bar := $FishStaminaBar
-@onready var catch_progress_bar := $CatchProgressBar
-@onready var fish_stamina_bar_label := $FishTextLabel
-@onready var rod_health_bar_label := $RodTextLabel
+@onready var rod_health_bar := $CanvasLayer/MarginContainer/VBoxContainer/MainContent/RightSide/RodHealthBar
+@onready var fish_stamina_bar := $CanvasLayer/MarginContainer/VBoxContainer/MainContent/LeftSide/FishStaminaBar
+@onready var catch_progress_bar := $CanvasLayer/MarginContainer/VBoxContainer/TopBar/CatchProgressBar
+@onready var catch_progress_bar_label := $CanvasLayer/MarginContainer/VBoxContainer/TopBar/CatchProgressBar/CatchLabel
+@onready var fish_stamina_bar_label := $CanvasLayer/MarginContainer/VBoxContainer/MainContent/LeftSide/FishTextLabel
+@onready var rod_health_bar_label := $CanvasLayer/MarginContainer/VBoxContainer/MainContent/RightSide/RodTextLabel
 
 # Sprite nodes for fish direction indicators
-@onready var left_sprites := [$LeftFish]
-@onready var right_sprites := [$RightFish]
-@onready var neutral_sprites := [$NeutralFish]
+@onready var left_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/FishContainer/LeftFish]
+@onready var right_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/FishContainer/RightFish]
+@onready var neutral_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/FishContainer/NeutralFish]
 
 # Sprite nodes for fishing rod direction indicators
-@onready var left_rod_sprites := [$LeftRodBend]
-@onready var right_rod_sprites := [$RightRodBend]
-@onready var idle_rod_sprites := [$IdleRod]
-@onready var middle_rod_sprites := [$MiddleRodBend]
+@onready var left_rod_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/RodContainer/LeftRodBend]
+@onready var right_rod_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/RodContainer/RightRodBend]
+@onready var idle_rod_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/RodContainer/IdleRod]
+@onready var middle_rod_sprites := [$CanvasLayer/MarginContainer/VBoxContainer/MainContent/Center/RodContainer/MiddleRodBend]
 
-#background sprites
-@onready var danger_background := $LosingHealthBackground
-@onready var fish_tired_background := $FishTiredBackground
-@onready var yanking_background := $YankingFishBackground
+# Background sprites
+@onready var danger_background := $CanvasLayer/BackgroundContainer/LosingHealthBackground
+@onready var fish_tired_background := $CanvasLayer/BackgroundContainer/FishTiredBackground
+@onready var yanking_background := $CanvasLayer/BackgroundContainer/YankingFishBackground
 
-var current_background: Sprite2D = null
+var current_background: TextureRect = null
 const FADE_DURATION := 0.3
 
 # Game parameters
@@ -75,6 +76,8 @@ const HELD_CATCH_MULTIPLIERS: Dictionary = {
 	Difficulty.EXTREME: 2.0
 }
 
+signal fish_game_over
+
 func _ready():
 	# get a random fish!
 	var fish: Fish = Globals.DexInstance.random_fish()
@@ -119,6 +122,9 @@ func _ready():
 	fish_tired_background.modulate.a = 0
 	yanking_background.modulate.a = 0
 
+	print("FishingGame ready, in viewport: ", get_viewport())
+	print("Parent is: ", get_parent())
+
 func _process(delta):
 	if current_fish_stamina <= 0:
 		is_fish_tired = true
@@ -148,8 +154,8 @@ func _process(delta):
 		Globals.FishWasCaught = true
 		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
 		Globals.gain_experience(calculate_current_EXP(randf() * 1000))
-		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
-		
+		emit_game_over()
+	
 	#Update the rod sprite	
 	update_rod_direction_sprites()
 	
@@ -163,6 +169,11 @@ func _process(delta):
 		rod_health_bar.value = current_rod_health
 	
 	update_background_state()
+
+func emit_game_over():
+	print("Game over triggered")
+	emit_signal("fish_game_over")
+	
 
 func handle_tired_state(delta):
 	is_fish_tired = true
@@ -220,7 +231,7 @@ func handle_active_state(delta):
 	# Check for rod break
 	if current_rod_health <= 0:
 		#print("Rod broke!")
-		get_tree().change_scene_to_file("res://Scenes/game_background.tscn")
+		emit_signal("fish_game_over")
 
 func get_player_direction() -> String:
 	if Input.is_action_pressed("ui_left"):
@@ -284,7 +295,7 @@ func update_bars_visibility():
 		rod_health_bar.visible = Globals.fisher_level > 2
 		rod_health_bar_label.visible = Globals.fisher_level > 2
 
-func fade_to_background(new_background: Sprite2D) -> void:
+func fade_to_background(new_background: TextureRect) -> void:
 	if current_background == new_background:
 		return
 		

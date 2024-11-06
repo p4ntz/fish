@@ -13,3 +13,5 @@ func _on_pressed() -> void:
 	var window = window_scene.instantiate()
 	add_child(window)
 	window.load_scene("res://Scenes/Gutscha.tscn", "Gutscha")
+
+	get_tree().call_group("window_buttons", "release_focus")

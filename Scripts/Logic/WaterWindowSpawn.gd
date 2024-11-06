@@ -11,3 +11,5 @@ func _on_pond_pressed():  # Fixed function name formatting
 		randf_range(0, get_viewport_rect().size.x - 200),
 		randf_range(0, get_viewport_rect().size.y - 150)
 	)
+
+	get_tree().call_group("window_buttons", "release_focus")

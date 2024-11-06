@@ -14,8 +14,8 @@ var snap_points: Array[Vector2] = [
 								  ]
 var snap_threshold := 100
 
-var current_z_index := 0
-static var top_z_index := 0
+var current_z_index := -25
+static var top_z_index := -25
 
 @onready var panel: Node = get_node("Panel")
 @onready var label: Node = get_node("Panel/Label")

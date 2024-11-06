@@ -26,8 +26,6 @@ extends Node2D
 var current_background: Sprite2D = null
 const FADE_DURATION := 0.3
 
-signal minigame_completed
-
 # Game parameters
 var max_rod_health: float = Globals.maximum_rod_health
 var current_rod_health: float = Globals.maximum_rod_health
@@ -38,39 +36,39 @@ var fish_recovery_speed: float = Globals.base_fish_recovery_speed
 var rod_damage_rate: float = Globals.rod_damage_rate
 var fish_catch_rate: float = Globals.fish_catch_rate
 var fish_held_catch_rate: float = Globals.fish_held_catch_rate
-var catch_progress := 0.0
+var catch_progress: float = 0.0
 
 enum Difficulty { EASY, MEDIUM, HARD, EXTREME }
 var catching_difficulty: int
 
 # Fish state
-var fish_direction := "none"  # "left", "right", or "none"
+var fish_direction: String = "none"  # "left", "right", or "none"
 var direction_timer: Timer
-var is_fish_tired := false
+var is_fish_tired: bool = false
 
 # Difficulty multipliers
-const STAMINA_MULTIPLIERS = {
+const STAMINA_MULTIPLIERS: Dictionary = {
 	Difficulty.EASY: 0.6,
 	Difficulty.MEDIUM: 0.45,
 	Difficulty.HARD: 0.3,
 	Difficulty.EXTREME: 0.15
 }
 
-const ROD_DAMAGE_MULTIPLIERS = {
+const ROD_DAMAGE_MULTIPLIERS: Dictionary = {
 	Difficulty.EASY: 0.2,
 	Difficulty.MEDIUM: 0.4,
 	Difficulty.HARD: 0.6,
 	Difficulty.EXTREME: 0.8
 }
 
-const CATCH_RATE_MULTIPLIERS = {
+const CATCH_RATE_MULTIPLIERS: Dictionary = {
 	Difficulty.EASY: 8.0,
 	Difficulty.MEDIUM: 4.0,
 	Difficulty.HARD: 2.0,
 	Difficulty.EXTREME: 1.0
 }
 
-const HELD_CATCH_MULTIPLIERS = {
+const HELD_CATCH_MULTIPLIERS: Dictionary = {
 	Difficulty.EASY: 8.0,
 	Difficulty.MEDIUM: 5.0,
 	Difficulty.HARD: 3.0,
@@ -98,13 +96,13 @@ func _ready():
 	add_child(direction_timer)
 	var tracked_fish: Fish = Globals.DexInstance.tracked_fish
 	match tracked_fish.catching_difficulty:
-		Difficulty.EASY:
+		Fish.Difficulty.EASY:
 			direction_timer.wait_time = 1.5
-		Difficulty.MEDIUM:
+		Fish.Difficulty.MEDIUM:
 			direction_timer.wait_time = 1.0
-		Difficulty.HARD:
+		Fish.Difficulty.HARD:
 			direction_timer.wait_time = 0.5
-		Difficulty.EXTREME:
+		Fish.Difficulty.EXTREME:
 			direction_timer.wait_time = 0.25
 	direction_timer.timeout.connect(change_fish_direction)
 	direction_timer.start()
@@ -175,13 +173,13 @@ func handle_tired_state(delta):
 	# Restore stamina at different rates based on difficulty
 	var restore_rate := 0.0
 	match Globals.DexInstance.tracked_fish.catching_difficulty:
-		Difficulty.EASY:
+		Fish.Difficulty.EASY:
 			restore_rate = fish_recovery_speed * 0.5
-		Difficulty.MEDIUM:
+		Fish.Difficulty.MEDIUM:
 			restore_rate = fish_recovery_speed * 1.0
-		Difficulty.HARD:
+		Fish.Difficulty.HARD:
 			restore_rate = fish_recovery_speed * 1.5
-		Difficulty.EXTREME:
+		Fish.Difficulty.EXTREME:
 			restore_rate = fish_recovery_speed * 2.0
 	
 	current_fish_stamina += restore_rate * delta

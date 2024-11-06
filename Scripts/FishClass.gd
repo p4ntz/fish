@@ -61,21 +61,21 @@ enum FishType { COMMON, RARE, EXOTIC, LEGENDARY }
 enum ColorVariant { NORMAL, RED, GREEN, BLUE, RAINBOW }
 @export var current_color: ColorVariant = ColorVariant.NORMAL
 @export var color_spawn_chances: Dictionary = {
-	ColorVariant.NORMAL: 85.0,  # 85% chance
-	ColorVariant.RED: 5.0,      # 5% chance
-	ColorVariant.GREEN: 5.0,    # 5% chance
-	ColorVariant.BLUE: 4.0,     # 4% chance
-	ColorVariant.RAINBOW: 1.0	# 1% chance
-}
-	
+												  ColorVariant.NORMAL: 85.0,  # 85% chance
+												  ColorVariant.RED: 5.0,      # 5% chance
+												  ColorVariant.GREEN: 5.0,    # 5% chance
+												  ColorVariant.BLUE: 4.0,     # 4% chance
+												  ColorVariant.RAINBOW: 1.0	# 1% chance
+											  }
+
 @export var color_value_multipliers: Dictionary = {
-	ColorVariant.NORMAL: 1.0,
-	ColorVariant.RED: 2.0,
-	ColorVariant.GREEN: 2.0,
-	ColorVariant.BLUE: 2.0,
-	ColorVariant.RAINBOW: 10.0
-}
-	
+													  ColorVariant.NORMAL: 1.0,
+													  ColorVariant.RED: 2.0,
+													  ColorVariant.GREEN: 2.0,
+													  ColorVariant.BLUE: 2.0,
+													  ColorVariant.RAINBOW: 10.0
+												  }
+
 # Statistics Tracking
 var largest_caught: float = 0.0
 var smallest_caught: float = 0.0
@@ -83,11 +83,11 @@ var last_caught_date: int = 0  # Unix timestamp
 var last_caught_location: String = ""
 
 # Feel Free to add more vars or Methods
- 
+
 # Methods
 func calculate_current_EXP(size: float) -> int:
 	var exp_base := size + (rarity * 10)
-	
+
 	# Add difficulty bonus
 	var difficulty_bonus: int
 	match catching_difficulty:
@@ -101,24 +101,24 @@ func calculate_current_EXP(size: float) -> int:
 			difficulty_bonus = 5
 		_:
 			difficulty_bonus = 0
-	
+
 	exp_base += difficulty_bonus * 10
-	
+
 	# First catch bonus
 	if not is_discovered:
 		exp_base += 50
-	
+
 	# Color variant multiplier
 	exp_base *= color_value_multipliers[current_color]
-	
+
 	return int(exp_base)  # Convert to integer
 
-	
+
 # Function to randomly determine fish color when caught
 func roll_color_variant() -> void:
 	var total := 0.0
 	var roll := randf() * 100  # Random number between 0 and 100
-	
+
 	for color in color_spawn_chances.keys():
 		total += color_spawn_chances[color]
 		if roll <= total:
@@ -132,14 +132,14 @@ func get_color_name() -> String:
 func can_be_caught_now(current_time: String, current_season: String, current_location: String) -> bool:
 	var can_catch: bool = true
 
-	var current_fishing_location = Globals.get_current_fishing_location()
+	var current_fishing_location: String = Globals.get_current_fishing_location()
 
 	if not current_fishing_location in locations:
 		can_catch = false
-		
+
 	if not current_time in time_of_day:
 		can_catch = false
-		
+
 	if not current_season in seasons:
 		can_catch = false
 
@@ -150,13 +150,13 @@ func record_catch(size: float, location: String) -> void:
 	print("Total fish caught: ", Globals.total_fish_caught)
 	Globals.total_fish_weight += size
 	print("Total fish weight caught: ", Globals.total_fish_weight)
-	
+
 	# Check if fish is in collection and add it if not
 	if not fish_name in Globals.fish_array:
 		Globals.fish_array.append(fish_name)
 		Globals.total_fish_dex_entries += 1
 		print("New fish discovered! Total unique fish: ", Globals.total_fish_dex_entries)
-	
+
 	current_size = size
 	if size > largest_caught:
 		largest_caught = size

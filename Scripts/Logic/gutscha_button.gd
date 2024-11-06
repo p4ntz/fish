@@ -9,4 +9,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Gutscha.tscn")
+	var window_scene = preload("res://Scenes/window.tscn")
+	var window = window_scene.instantiate()
+	add_child(window)
+	window.load_scene("res://Scenes/Gutscha.tscn", "Gutscha")

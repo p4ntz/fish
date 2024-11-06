@@ -86,16 +86,16 @@ func _input(event):
 			
 			var closest_snap: Vector2 = Vector2.ZERO
 			var closest_distance: float = snap_threshold
-			var snapped := false
+			var snap: bool = false
 			
 			for snap_point in snap_points:
 				var distance: float = global_window_center.distance_to(snap_point)
 				if distance < closest_distance:
 					closest_distance = distance
 					closest_snap = snap_point
-					snapped = true
+					snap = true
 			
-			if snapped:
+			if snap:
 				var local_snap_pos = closest_snap - global_position - (panel.size / 2)
 				panel.position = local_snap_pos
 			else:
@@ -115,6 +115,8 @@ func _input(event):
 			
 			if width_height_ratio >= 4.0:
 				label.text = "River"
+			elif panel.size >= get_viewport().get_visible_rect().size:
+				label.text = "Ocean"
 			elif height_width_ratio >= 4.0:
 				label.text = "Waterfall"
 			elif size_ratio >= 2.0:
@@ -128,7 +130,7 @@ func _input(event):
 
 func _draw():
 	for point in snap_points:
-		var local_point = point - global_position
+		var local_point := point - global_position
 		draw_circle(local_point, 5, Color.RED)
 	
 	if panel:

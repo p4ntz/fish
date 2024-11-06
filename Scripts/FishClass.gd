@@ -146,8 +146,17 @@ func can_be_caught_now(current_time: String, current_season: String, current_loc
 	return can_catch
 
 func record_catch(size: float, location: String) -> void:
-	amount_caught += 1
-	total_weight_caught += size
+	Globals.total_fish_caught += 1
+	print("Total fish caught: ", Globals.total_fish_caught)
+	Globals.total_fish_weight += size
+	print("Total fish weight caught: ", Globals.total_fish_weight)
+	
+	# Check if fish is in collection and add it if not
+	if not fish_name in Globals.fish_array:
+		Globals.fish_array.append(fish_name)
+		Globals.total_fish_dex_entries += 1
+		print("New fish discovered! Total unique fish: ", Globals.total_fish_dex_entries)
+	
 	current_size = size
 	if size > largest_caught:
 		largest_caught = size

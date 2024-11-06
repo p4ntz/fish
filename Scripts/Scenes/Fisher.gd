@@ -6,6 +6,8 @@ extends Node2D
 #@onready var fisher_stats: Node = $FisherStats
 @onready var level_label: Label = $Level
 @onready var exp_bar: ProgressBar = $EXPBar
+@onready var time: Label = $Time
+@onready var season: Label = $Season
 
 # Timers
 var fish_spawn_timer: Timer
@@ -109,3 +111,9 @@ func try_catch_fish():
 		catch_window_timer.stop()
 		Globals.IsFishing = true
 		get_tree().change_scene_to_file("res://Scenes/fishing.tscn")
+
+func _process(delta: float) -> void:
+	var TimeText: String = "Time of Day: {time}" 
+	time.text = TimeText.format({"time":Globals.current_time})
+	var SeasonText: String = "Current Season: {season}"
+	season.text = SeasonText.format({"season": Globals.current_season})

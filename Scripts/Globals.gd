@@ -26,6 +26,7 @@ func get_fishing_locations() -> Array:
 func set_current_fishing_location(water_type: String):
 	current_fishing_location = water_type
 	print("Now fishing in: ", current_fishing_location)
+	total_locations_discovered += 1
 	
 func get_current_fishing_location() -> String:
 	return current_fishing_location
@@ -67,4 +68,8 @@ func level_up() -> void:
 @export var base_fish_stamina_drain: float = 50
 
 
-
+# Player Stats
+@export var total_fish_caught: int = 0
+@export var total_fish_weight: float = 0
+@export var total_fish_caught_active: int = 0
+@export var total_locations_discovered: int = 0

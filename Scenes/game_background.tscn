@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4n33w5u131ad"]
+[gd_scene load_steps=7 format=3 uid="uid://b4n33w5u131ad"]
 
 [ext_resource type="Script" path="res://Scripts/Logic/WindowSpawn.gd" id="1_vpjux"]
 [ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://Scenes/fisher.tscn" id="1_wa21t"]
 [ext_resource type="Texture2D" uid="uid://b6bak02dp7j1e" path="res://Sprites/Trash.png" id="3_bwfql"]
+[ext_resource type="Script" path="res://Scripts/Logic/pond_button.gd" id="3_q5j8n"]
+[ext_resource type="Script" path="res://Scripts/Scenes/pond_tutorial.gd" id="5_npxem"]
+[ext_resource type="Script" path="res://Scripts/Scenes/catching_tutorial.gd" id="6_fp04f"]
 
 [node name="Game Background Node" type="Node2D"]
 script = ExtResource("1_vpjux")
@@ -16,6 +19,7 @@ offset_top = 690.0
 offset_right = 1279.0
 offset_bottom = 721.0
 text = "pond"
+script = ExtResource("3_q5j8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(53, 662)
@@ -35,5 +39,23 @@ offset_top = 28.0
 offset_right = 192.0
 offset_bottom = 47.0
 text = "Add the current time here"
+
+[node name="PondTutorial" type="RichTextLabel" parent="."]
+offset_left = 1048.0
+offset_top = 568.0
+offset_right = 1277.0
+offset_bottom = 670.0
+text = "Hey! you should try fishing in water instead. Here, grab this pond and drag it over to your fisher!"
+script = ExtResource("5_npxem")
+
+[node name="CatchingTutorial" type="RichTextLabel" parent="."]
+offset_left = 668.0
+offset_top = 277.0
+offset_right = 965.0
+offset_bottom = 499.0
+text = "Hey fish. fans! Hope youre ready to fish! make sure to pull the rod in the opposite direction the fish is going using the arrow keys, and holding down to give it a good yank when its tired!
+
+When you hook a fish, press start to start reeling it in!"
+script = ExtResource("6_fp04f")
 
 [connection signal="pressed" from="Pond" to="." method="_on_pond_pressed"]

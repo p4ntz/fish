@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://dskpgrfbonfrr"]
+[gd_scene load_steps=3 format=3 uid="uid://b2qjo1f4rl1s4"]
 
-[ext_resource type="Script" path="res://Scripts/Logic/MinResizeWindow.gd" id="1_4p1ds"]
 [ext_resource type="Script" path="res://Scripts/Gutscha.gd" id="1_b4o6n"]
 [ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_to280"]
 
@@ -18,7 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_4p1ds")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1

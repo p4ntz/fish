@@ -106,23 +106,6 @@ func update_season() -> void:
 @export var fisher_experience_total: int = 0
 @export var fisher_experience_required: int = 0
 
-func _ready():
-	fisher_experience_required = get_required_experience(fisher_level + 1)
-
-	# Time progression
-	time_timer = Timer.new()
-	time_timer.one_shot = true
-	time_timer.timeout.connect(update_time)
-	add_child(time_timer)
-	time_timer.start(time_switch)
-
-	# Season progression
-	season_timer = Timer.new()
-	season_timer.one_shot = true
-	season_timer.timeout.connect(update_season)
-	add_child(season_timer)
-	season_timer.start(season_switch)
-
 func get_required_experience(target_level: int) -> int:
 	return round(pow(target_level, 1.8) + target_level * 4 + 100)
 
@@ -150,7 +133,6 @@ func level_up() -> void:
 @export var fish_held_catch_rate: float = 12
 @export var base_fish_stamina_drain: float = 50
 
-
 # Player Stats
 @export var total_fish_caught: int = 0
 @export var total_fish_weight: float = 0
@@ -163,3 +145,54 @@ func level_up() -> void:
 @export var color_light: Color = Color.html("#8bac0f")
 @export var color_dark: Color = Color.html("#306230")
 @export var color_darkest: Color = Color.html("#0f380f")
+
+# Window Resizing
+@export var min_window_size : Vector2i = Vector2i(400, 400)
+
+func setup_min_window_size() -> void:
+	ProjectSettings.set_setting("display/window/size/min_width", min_window_size.x)
+	ProjectSettings.set_setting("display/window/size/min_height", min_window_size.y)
+	DisplayServer.window_set_min_size(min_window_size)
+
+func enforce_min_window_size() -> void:
+	var current_size := DisplayServer.window_get_size()
+	if current_size.x < min_window_size.x or current_size.y < min_window_size.y:
+		DisplayServer.window_set_size(
+			Vector2i(max(current_size.x, min_window_size.x), max(current_size.y, min_window_size.y))
+		)
+
+func _ready() -> void:
+	setup_min_window_size()
+	
+	fisher_experience_required = get_required_experience(fisher_level + 1)
+	
+	# Time progression
+	time_timer = Timer.new()
+	time_timer.one_shot = true
+	time_timer.timeout.connect(update_time)
+	add_child(time_timer)
+	time_timer.start(time_switch)
+	
+	# Season progression
+	season_timer = Timer.new()
+	season_timer.one_shot = true
+	season_timer.timeout.connect(update_season)
+	add_child(season_timer)
+	season_timer.start(season_switch)
+
+	# Time progression
+	time_timer = Timer.new()
+	time_timer.one_shot = true
+	time_timer.timeout.connect(update_time)
+	add_child(time_timer)
+	time_timer.start(time_switch)
+
+	# Season progression
+	season_timer = Timer.new()
+	season_timer.one_shot = true
+	season_timer.timeout.connect(update_season)
+	add_child(season_timer)
+	season_timer.start(season_switch)
+	
+func _process(delta: float) -> void:
+	enforce_min_window_size()

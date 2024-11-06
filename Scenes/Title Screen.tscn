@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8vs5ifvkuo7o"]
+[gd_scene load_steps=5 format=3 uid="uid://b8vs5ifvkuo7o"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/new_game_button.gd" id="1_dyww7"]
-[ext_resource type="Script" path="res://Scripts/Logic/MinResizeWindow.gd" id="1_whoat"]
 [ext_resource type="Script" path="res://Scripts/Scenes/quit_button.gd" id="2_5xfiu"]
 [ext_resource type="Script" path="res://Scripts/Music/title_music.gd" id="2_akphk"]
 
@@ -22,7 +21,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_whoat")
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1

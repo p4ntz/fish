@@ -150,6 +150,13 @@ func record_catch(size: float, location: String) -> void:
 	print("Total fish caught: ", Globals.total_fish_caught)
 	Globals.total_fish_weight += size
 	print("Total fish weight caught: ", Globals.total_fish_weight)
+	
+	# Check if fish is in collection and add it if not
+	if not fish_name in Globals.fish_array:
+		Globals.fish_array.append(fish_name)
+		Globals.total_fish_dex_entries += 1
+		print("New fish discovered! Total unique fish: ", Globals.total_fish_dex_entries)
+	
 	current_size = size
 	if size > largest_caught:
 		largest_caught = size

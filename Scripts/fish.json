@@ -568,5 +568,131 @@
 			"evening",
 			"night"
 		]
+	},
+	"26": {
+		"fish_name": "Fathead minnow",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
+	},
+	"27": {
+		"fish_name": "Guppy",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
+	},
+	"28": {
+		"fish_name": "Horse Mackerel",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
+	},
+	"29": {
+		"fish_name": "Lingcod",
+		"difficulty": 2,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		]
+	},
+	"30": {
+		"fish_name": "Night Prow",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"pond"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer"
+		],
+		"time_of_day": [
+			"night"
+		]
+	},
+	"31": {
+    	"fish_name": "Winter Ghost",
+    	"difficulty": 2,
+    	"rarity": 0.2,
+    	"locations": ["pond"],
+    	"seasons": ["winter"]
+	},
+	"32": {
+    	"fish_name": "Mystery Fish",
+    	"difficulty": 3,
+    	"locations": ["pond"],
+    	"seasons": ["summer", "fall"],
+    	"time_of_day": ["morning"]
+	},
+	"33": {
+    	"fish_name": "Unnamed Species",
+    	"rarity": 0.5,
+    	"locations": ["pond"],
+    	"seasons": ["spring"],
+    	"time_of_day": ["evening"]
 	}
 }

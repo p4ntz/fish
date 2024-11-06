@@ -5,6 +5,7 @@ extends Node
 @export var DexInstance: Dex = Dex.new().init_data()
 @export var IsFishing: bool = false
 @export var FishWasCaught: bool = false
+@export var fish_array: Array = []
 
 @export var SizeDecimalPlaces: float = 0.1
 @export var MusicVolume: float = 0.1
@@ -26,7 +27,15 @@ func get_fishing_locations() -> Array:
 func set_current_fishing_location(water_type: String):
 	current_fishing_location = water_type
 	print("Now fishing in: ", current_fishing_location)
-	total_locations_discovered += 1
+	var location_exists = false
+	for location in fishing_locations:
+		if location["type"] == water_type:
+			location_exists = true
+			total_locations_discovered += 1
+			print("Total locations discovered: ", total_locations_discovered)
+			break
+	if not location_exists:
+		add_fishing_location(Vector2.ZERO, water_type)
 	
 func get_current_fishing_location() -> String:
 	return current_fishing_location
@@ -73,3 +82,4 @@ func level_up() -> void:
 @export var total_fish_weight: float = 0
 @export var total_fish_caught_active: int = 0
 @export var total_locations_discovered: int = 0
+@export var total_fish_dex_entries: int = 0

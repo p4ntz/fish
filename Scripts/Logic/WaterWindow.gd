@@ -9,9 +9,9 @@ var initial_size := Vector2()
 var resize_handle_size := 20
 
 var snap_points: Array[Vector2] = [
-	Vector2(50, 650),  # Delete point
-	Vector2(570, 500)  # Fishing location point
-]
+								  Vector2(50, 650),  # Delete point
+								  Vector2(570, 500)  # Fishing location point
+								  ]
 var snap_threshold := 100
 
 var current_z_index := 0
@@ -26,7 +26,7 @@ func _ready():
 	initial_size = panel.size
 	start_window_size = panel.size
 	label.text = "Pond"
-	
+
 	current_z_index = top_z_index
 	z_index = current_z_index
 	top_z_index += 1
@@ -48,7 +48,7 @@ func _input(event) -> void:
 		dragging = false
 		resizing = false
 		return
-		
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse_pos: Vector2 = event.position - global_position
 		if event.pressed:
@@ -77,70 +77,76 @@ func _input(event) -> void:
 						break
 			dragging = false
 			resizing = false
-	
+
 	elif event is InputEventMouseMotion:
 		if dragging:
 			var new_pos: Vector2 = start_window_pos + (event.position - drag_start_pos)
-			
+
 			var global_window_center: Vector2 = global_position + new_pos + (panel.size / 2)
-			
+
 			var closest_snap: Vector2 = Vector2.ZERO
 			var closest_distance: float = snap_threshold
 			var snap: bool = false
-			
+
 			for snap_point in snap_points:
 				var distance: float = global_window_center.distance_to(snap_point)
 				if distance < closest_distance:
 					closest_distance = distance
 					closest_snap = snap_point
 					snap = true
-			
+
 			if snap:
 				var local_snap_pos = closest_snap - global_position - (panel.size / 2)
 				panel.position = local_snap_pos
 			else:
 				panel.position = new_pos
-		
+
 		elif resizing:
 			if Globals.total_fish_dex_entries > 4:
 				var new_size: Vector2 = start_window_size + (event.position - drag_start_pos)
 				new_size.x = max(100, new_size.x)
 				new_size.y = max(100, new_size.y)
-				
+
 				panel.size = new_size
 				_update_label_position()
-				
+
 				var width_height_ratio: float = panel.size.x / panel.size.y
 				var height_width_ratio: float = panel.size.y / panel.size.x
 				var size_ratio: float = (panel.size.x * panel.size.y) / (initial_size.x * initial_size.y)
-				
+
 				if width_height_ratio >= 4.0:
 					label.text = "River"
 				elif panel.size >= get_viewport().get_visible_rect().size:
 					label.text = "Ocean"
 				elif height_width_ratio >= 4.0:
 					label.text = "Waterfall"
+				elif size_ratio >= 2.0:
+					label.text = "Lake"
+				elif size_ratio <= 0.5:
+					label.text = "Puddle"
+				else:
+					label.text = "Pond"
 			else:
 				resizing = false  # Cancel resize attempt if not enough fish discovered
-		
+
 		queue_redraw()
 
 func _draw():
 	for point in snap_points:
 		var local_point := point - global_position
 		draw_circle(local_point, 5, Color.RED)
-	
+
 	if panel:
 		var handle_pos = panel.position + panel.size - Vector2(resize_handle_size, resize_handle_size)
 		draw_rect(Rect2(handle_pos, Vector2(resize_handle_size, resize_handle_size)), Color.GRAY)
 
 func _is_in_resize_handle(mouse_pos: Vector2) -> bool:
 	var handle_rect: Rect2 = Rect2(
-		Vector2(panel.size.x - resize_handle_size, panel.size.y - resize_handle_size),
-		Vector2(resize_handle_size, resize_handle_size)
-	)
+								 Vector2(panel.size.x - resize_handle_size, panel.size.y - resize_handle_size),
+								 Vector2(resize_handle_size, resize_handle_size)
+							 )
 	return handle_rect.has_point(mouse_pos)
-	
+
 func _update_label_position():
 	var label_rect = label.get_rect()
 	var panel_rect = panel.get_rect()

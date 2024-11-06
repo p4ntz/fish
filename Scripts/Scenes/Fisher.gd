@@ -6,6 +6,8 @@ extends Node2D
 #@onready var fisher_stats: Node = $FisherStats
 @onready var level_label: Label = $Level
 @onready var exp_bar: ProgressBar = $EXPBar
+@onready var time: Label = $Time
+@onready var season: Label = $Season
 
 # Timers
 var fish_spawn_timer: Timer
@@ -18,28 +20,28 @@ func _ready():
 	# Hide the active indicator at start
 	indicator_normal.visible = true
 	indicator_active.visible = false
-	
+
 	# Setup fish spawn timer
 	fish_spawn_timer = Timer.new()
 	add_child(fish_spawn_timer)
 	fish_spawn_timer.one_shot = true  # Timer only runs once
 	fish_spawn_timer.timeout.connect(spawn_fish)
-	
+
 	# Setup catch window timer
 	catch_window_timer = Timer.new()
 	add_child(catch_window_timer)
 	catch_window_timer.one_shot = true
 	catch_window_timer.timeout.connect(miss_fish)
-	
+
 	# Setup caught timer
 	caught_message_timer = Timer.new()
 	add_child(caught_message_timer)
 	caught_message_timer.one_shot = true
 	caught_message_timer.timeout.connect(hide_catch_message)
-	
+
 	# Start the first fish spawn timer
 	start_fish_timer()
-	
+
 	# Display a message if we just left the Fishing Game
 	if Globals.IsFishing:
 		if Globals.FishWasCaught:
@@ -50,10 +52,10 @@ func _ready():
 		# Clean up state.
 		Globals.FishWasCaught = false
 		Globals.IsFishing = false
-		
+
 		# Free the Fish ref for memeory management
 		Globals.DexInstance.free_fish()
-		
+
 		# Display notice
 		fish_caught.visible = true
 		caught_message_timer.start(5.0)
@@ -67,7 +69,7 @@ func spawn_fish():
 	print("A fish appeared!")
 	indicator_normal.visible = false
 	indicator_active.visible = true
-	
+
 	# Start the catch window timer (5 seconds to catch)
 	catch_window_timer.start(5.0)
 
@@ -75,10 +77,10 @@ func miss_fish():
 	print("Failed to catch the fish!")
 	indicator_normal.visible = true
 	indicator_active.visible = false
-	
+
 	# Start the next fish spawn timer
 	start_fish_timer()
-	
+
 func hide_catch_message():
 	fish_caught.visible = false
 
@@ -86,8 +88,8 @@ func _input(event):
 	# Check for space key press
 	if event.is_action_pressed("ui_accept"):  # Space bar by default
 		try_catch_fish()
-	
-	# Check for mouse click
+
+		# Check for mouse click
 	elif event.is_action_pressed("ui_click"):
 		if event is InputEventMouseButton:
 			# Check if click is within fisher or indicator area
@@ -97,7 +99,7 @@ func _input(event):
 func is_click_in_area(click_pos: Vector2) -> bool:
 	# Convert click position to local coordinates if needed
 	var local_pos: Vector2 = to_local(click_pos)
-	
+
 	# Check if click is within fisher or indicator sprites
 	# You'll need to adjust these based on your sprite sizes
 	var click_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
@@ -109,3 +111,9 @@ func try_catch_fish():
 		catch_window_timer.stop()
 		Globals.IsFishing = true
 		get_tree().change_scene_to_file("res://Scenes/fishing.tscn")
+
+func _process(delta: float) -> void:
+	var TimeText: String = "Time of Day: {time}"
+	time.text = TimeText.format({"time":Globals.current_time})
+	var SeasonText: String = "Current Season: {season}"
+	season.text = SeasonText.format({"season": Globals.current_season})

@@ -37,20 +37,6 @@ position = Vector2(53, 662)
 scale = Vector2(0.147826, 0.147826)
 texture = ExtResource("3_bwfql")
 
-[node name="Season" type="Label" parent="."]
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 212.0
-offset_bottom = 25.0
-text = "Add the current season here"
-
-[node name="Time" type="Label" parent="."]
-offset_left = 12.0
-offset_top = 28.0
-offset_right = 192.0
-offset_bottom = 47.0
-text = "Add the current time here"
-
 [node name="PondTutorial" type="RichTextLabel" parent="."]
 offset_left = 1048.0
 offset_top = 568.0

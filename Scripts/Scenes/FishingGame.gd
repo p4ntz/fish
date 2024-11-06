@@ -36,7 +36,7 @@ var current_fish_stamina := 100.0
 var catch_progress := 0.0
 
 enum Difficulty { EASY, MEDIUM, HARD, EXTREME }
-var catching_difficulty: int = Difficulty.EASY
+var catching_difficulty: int
 
 # Fish state
 var fish_direction := "none"  # "left", "right", or "none"
@@ -260,37 +260,38 @@ func update_background_state():
 		fade_to_background(yanking_background)
 	elif player_direction == "none" or player_direction != fish_direction:
 		fade_to_background(danger_background)
-
-# func calculate_current_EXP(size: float) -> int:
-# 	var exp_base := size
 	
-# 	# Add difficulty bonus
-# 	var difficulty_bonus: int
-# 	match catching_difficulty:
-# 		Difficulty.EASY:
-# 			difficulty_bonus = 1
-# 		Difficulty.MEDIUM:
-# 			difficulty_bonus = 2
-# 		Difficulty.HARD:
-# 			difficulty_bonus = 3
-# 		Difficulty.EXTREME:
-# 			difficulty_bonus = 5
-# 		_:
-# 			difficulty_bonus = 0
-	
-# 	# Add fish-specific difficulty multiplier
-# 	var fish_multiplier: float = 1.0
-# 	match fish.fish.difficulty:
-# 		"easy":
-# 			fish_multiplier = 1.0
-# 		"medium": 
-# 			fish_multiplier = 1.5
-# 		"hard":
-# 			fish_multiplier = 2.0
-# 		"extreme":
-# 			fish_multiplier = 3.0
-	
-# 	# Calculate final EXP
-# 	exp_base = (exp_base + difficulty_bonus * 10) * fish_multiplier
-	
-# 	return int(exp_base)
+func calculate_current_EXP(size: float) -> int:
+	var exp_base := size
+	var tracked_fish: Fish = Globals.DexInstance.tracked_fish
+		
+	# Add difficulty bonus
+	var difficulty_bonus: int
+	match tracked_fish.catching_difficulty:
+		Difficulty.EASY:
+			difficulty_bonus = 1
+		Difficulty.MEDIUM:
+			difficulty_bonus = 2
+		Difficulty.HARD:
+			difficulty_bonus = 3
+		Difficulty.EXTREME:
+			difficulty_bonus = 5
+		_:
+			difficulty_bonus = 0
+		
+	# Add fish-specific difficulty multiplier
+	var fish_multiplier: float = 1.0
+	match Difficulty:
+		"easy":
+			fish_multiplier = 1.0
+		"medium": 
+			fish_multiplier = 1.5
+		"hard":
+			fish_multiplier = 2.0
+		"extreme":
+			fish_multiplier = 3.0
+		
+	# Calculate final EXP
+	exp_base = (exp_base + difficulty_bonus * 10) * fish_multiplier
+		
+	return int(exp_base)

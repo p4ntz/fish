@@ -19,7 +19,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"1": {
 		"fish_name": "Bass",
@@ -42,7 +43,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"2": {
 		"fish_name": "Curried Salmon",
@@ -64,7 +66,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"3": {
 		"fish_name": "Perch",
@@ -86,7 +89,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"4": {
 		"fish_name": "Can of Tuna",
@@ -108,7 +112,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"5": {
 		"fish_name": "Bluegill",
@@ -130,7 +135,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"6": {
 		"fish_name": "Redgill",
@@ -152,7 +158,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"7": {
 		"fish_name": "Yellowgill",
@@ -174,7 +181,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"8": {
 		"fish_name": "Puffer Fish",
@@ -196,7 +204,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"9": {
 		"fish_name": "Ogre Eel",
@@ -218,7 +227,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"10": {
 		"fish_name": "Walleye",
@@ -241,7 +251,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"11": {
 		"fish_name": "Sea Urchin",
@@ -263,7 +274,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"12": {
 		"fish_name": "Plastic Fish with Googly Eyes",
@@ -280,7 +292,8 @@
 		"time_of_day": [
 			"morning",
 			"afternoon"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"13": {
 		"fish_name": "A Man in a Fish Costume",
@@ -302,7 +315,8 @@
 		"time_of_day": [
 			"morning",
 			"afternoon"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"14": {
 		"fish_name": "Lionfish",
@@ -324,7 +338,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"15": {
 		"fish_name": "Catphish",
@@ -346,7 +361,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"16": {
 		"fish_name": "A Living Pot of Fish Stew",
@@ -368,7 +384,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"17": {
 		"fish_name": "Parrot Fish",
@@ -390,7 +407,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"18": {
 		"fish_name": "Red Snapper",
@@ -412,7 +430,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"19": {
 		"fish_name": "Cheese Carp",
@@ -436,7 +455,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"20": {
 		"fish_name": "Rune Fish",
@@ -458,7 +478,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"21": {
 		"fish_name": "Rubber Ducky",
@@ -480,7 +501,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"22": {
 		"fish_name": "Money Fish",
@@ -502,7 +524,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"23": {
 		"fish_name": "Sturgeon",
@@ -524,7 +547,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"24": {
 		"fish_name": "FRUG",
@@ -545,7 +569,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"25": {
 		"fish_name": "Airfish",
@@ -567,7 +592,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"26": {
 		"fish_name": "Fathead minnow",
@@ -589,7 +615,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"27": {
 		"fish_name": "Guppy",
@@ -611,7 +638,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"28": {
 		"fish_name": "Horse Mackerel",
@@ -633,7 +661,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"29": {
 		"fish_name": "Lingcod",
@@ -655,7 +684,8 @@
 			"afternoon",
 			"evening",
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	},
 	"30": {
 		"fish_name": "Night Prow",
@@ -672,6 +702,7 @@
 		],
 		"time_of_day": [
 			"night"
-		]
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	}
 }

@@ -21,6 +21,7 @@ func init_data() -> Dex:
 		fish.locations = fishNames[index]["locations"]
 		fish.seasons = fishNames[index]["seasons"]
 		fish.time_of_day = fishNames[index]["time_of_day"]
+		fish.sprite_path = fishNames[index]["sprite_path"]
 		for location in fishNames[index]["locations"]:
 			if not location in locations:
 				locations.append(fishNames[index]["locations"])

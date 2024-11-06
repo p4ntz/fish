@@ -112,6 +112,7 @@ func is_click_in_area(click_pos: Vector2) -> bool:
 func try_catch_fish():
 	if indicator_active.visible:
 		print("fish. start!")
+		# Stop both timers
 		catch_window_timer.stop()
 		hooked_stinger.visible = true
 		hooked_stinger.play_sfx()

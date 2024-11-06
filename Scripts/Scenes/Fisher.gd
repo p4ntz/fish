@@ -8,6 +8,7 @@ extends Node2D
 @onready var exp_bar: ProgressBar = $EXPBar
 @onready var time: Label = $Time
 @onready var season: Label = $Season
+@onready var hooked_stinger : Sprite2D = $HookedSprite
 
 # Timers
 var fish_spawn_timer: Timer
@@ -16,10 +17,15 @@ var caught_message_timer: Timer
 
 var overlay_layer: CanvasLayer
 
+
+
 func _ready():
 	# Hide the active indicator at start
 	indicator_normal.visible = true
 	indicator_active.visible = false
+	
+	# Hide "HOOKED" Stinger on at start
+	hooked_stinger.visible = false
 	
 	# Setup fish spawn timer
 	fish_spawn_timer = Timer.new()
@@ -109,6 +115,9 @@ func try_catch_fish():
 	if indicator_active.visible:
 		print("fish. start!")
 		catch_window_timer.stop()
+		hooked_stinger.visible = true
+		hooked_stinger.play_sfx()
+		await get_tree().create_timer(1).timeout
 		Globals.IsFishing = true
 		get_tree().change_scene_to_file("res://Scenes/fishing.tscn")
 

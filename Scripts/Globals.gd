@@ -67,7 +67,7 @@ enum Times {
 
 func update_time() -> void:
 	current_time_val += 1
-	if current_time_val == 5:
+	if current_time_val == 4:
 		current_time_val = 0
 	print(current_time_val)
 	match current_time_val:
@@ -84,8 +84,8 @@ func update_time() -> void:
 
 func update_season() -> void:
 	current_season_val += 1
-	if current_season_val == 5:
-		current_season_val = 1
+	if current_season_val == 4:
+		current_season_val = 0
 	print(current_season_val)
 	match current_season_val:
 		Seasons.SPRING:

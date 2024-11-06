@@ -45,7 +45,7 @@ var season_timer: Timer
 @export var current_season: String = "spring"
 var current_season_val: int = 0
 var ttime: float = 0.0
-@export var season_switch: int = 60
+@export var season_switch: int = 1800
 @export var current_time: String = "morning"
 var current_time_val: int = 0
 var stime: float = 0.0

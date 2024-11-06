@@ -43,7 +43,7 @@ func handle_snap_action(snap_index: int):
 		Globals.set_current_fishing_location(label.text.to_lower())
 		print("Added fishing location: ", label.text, " at ", snap_points[1])
 
-func _input(event):
+func _input(event) -> void:
 	if z_index != top_z_index and (dragging or resizing):
 		dragging = false
 		resizing = false

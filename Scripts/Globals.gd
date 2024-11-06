@@ -45,11 +45,12 @@ func get_required_experience(target_level: int) -> int:
 func gain_experience(amount: int) -> void:
 	fisher_experience += amount
 	fisher_experience_total += amount
-	while fisher_experience_total >= fisher_experience_required:
-		fisher_experience -= fisher_experience_required
+	while fisher_experience >= fisher_experience_required:
+		print(fisher_experience)
+		print(fisher_experience_required)
+		var keep := fisher_experience - fisher_experience_required
+		fisher_experience = keep
 		level_up()
-		if fisher_experience < fisher_experience_required:
-			break
 
 func level_up() -> void:
 	fisher_level += 1

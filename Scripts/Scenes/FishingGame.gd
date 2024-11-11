@@ -153,7 +153,7 @@ func _process(delta):
 		print("Fish caught!")
 		Globals.FishWasCaught = true
 		Globals.DexInstance.tracked_fish.record_catch(randf() *10, "testing")
-		Globals.gain_experience(calculate_current_EXP(randf() * 1000))
+		Globals.gain_experience(calculate_current_EXP(randf() * 10))
 		emit_game_over()
 	
 	#Update the rod sprite	

@@ -86,7 +86,7 @@ var last_caught_location: String = ""
 
 # Methods
 func calculate_current_EXP(size: float) -> int:
-	var exp_base := size + (rarity * 10)
+	var exp_base := size
 
 	# Add difficulty bonus
 	var difficulty_bonus: int
@@ -110,6 +110,12 @@ func calculate_current_EXP(size: float) -> int:
 
 	# Color variant multiplier
 	exp_base *= color_value_multipliers[current_color]
+
+	# Apply experience multiplier
+	if Globals.idle_mode:
+		exp_base *= Globals.idle_experience_multiplier
+	else:
+		exp_base *= Globals.experience_multiplier
 
 	return int(exp_base)  # Convert to integer
 

@@ -123,6 +123,9 @@ func level_up() -> void:
 	fisher_level += 1
 	fisher_experience_required = get_required_experience(fisher_level + 1)
 
+# Game Mode States
+@export var idle_mode: bool = false
+
 # fish game Stats
 @export var maximum_rod_health: float = 200
 @export var base_fish_stamina: float = 100
@@ -132,6 +135,17 @@ func level_up() -> void:
 @export var fish_catch_rate: float = 10
 @export var fish_held_catch_rate: float = 12
 @export var base_fish_stamina_drain: float = 50
+@export var min_fish_catching_window: float = 5
+@export var max_fish_catching_window: float = 10
+@export var experience_multiplier: float = 1
+
+# Idle Game Stats
+@export var idle_min_fish_window: float = 5
+@export var idle_max_fish_window: float = 10
+@export var idle_min_catch_delay: float = 0.5
+@export var idle_max_catch_delay: float = 2
+@export var idle_catch_chance: float = 1
+@export var idle_experience_multiplier: float = 0.25
 
 # Player Stats
 @export var total_fish_caught: int = 0
@@ -173,20 +187,6 @@ func _ready() -> void:
 	add_child(time_timer)
 	time_timer.start(time_switch)
 	
-	# Season progression
-	season_timer = Timer.new()
-	season_timer.one_shot = true
-	season_timer.timeout.connect(update_season)
-	add_child(season_timer)
-	season_timer.start(season_switch)
-
-	# Time progression
-	time_timer = Timer.new()
-	time_timer.one_shot = true
-	time_timer.timeout.connect(update_time)
-	add_child(time_timer)
-	time_timer.start(time_switch)
-
 	# Season progression
 	season_timer = Timer.new()
 	season_timer.one_shot = true

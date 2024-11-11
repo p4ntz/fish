@@ -9,13 +9,17 @@ extends Node2D
 @onready var time: Label = $Time
 @onready var season: Label = $Season
 @onready var hooked_stinger : Sprite2D = $HookedSprite
+@onready var mode_toggle_button: CheckButton = $ModeToggleButton
 
 # Timers
 var fish_spawn_timer: Timer
 var catch_window_timer: Timer
 var caught_message_timer: Timer
+var auto_catch_timer: Timer
 
 var overlay_layer: CanvasLayer
+
+signal fishing_mode_changed(is_idle: bool)
 
 func _ready():
 	# Hide the active indicator at start
@@ -43,6 +47,17 @@ func _ready():
 	caught_message_timer.one_shot = true
 	caught_message_timer.timeout.connect(hide_catch_message)
 
+	# Setup auto catch timer for idle mode
+	auto_catch_timer = Timer.new()
+	add_child(auto_catch_timer)
+	auto_catch_timer.one_shot = true
+	auto_catch_timer.timeout.connect(auto_catch_fish)
+
+	mode_toggle_button.toggled.connect(on_mode_toggle_button_toggled)
+
+	# Initialize based on current mode (idle or active)
+	update_fishing_mode(Globals.idle_mode)
+
 	# Start the first fish spawn timer
 	start_fish_timer()
 
@@ -65,8 +80,11 @@ func _ready():
 		caught_message_timer.start(5.0)
 
 func start_fish_timer():
-	# Random time between 5-10 seconds
-	var random_time: float = randf_range(5.0, 10.0)
+	var random_time: float
+	if Globals.idle_mode:
+		random_time = randf_range(Globals.idle_min_fish_window, Globals.idle_max_fish_window)
+	else:
+		random_time = randf_range(Globals.min_fish_catching_window, Globals.max_fish_catching_window)
 	fish_spawn_timer.start(random_time)
 
 func spawn_fish():
@@ -74,8 +92,21 @@ func spawn_fish():
 	indicator_normal.visible = false
 	indicator_active.visible = true
 
-	# Start the catch window timer (5 seconds to catch)
-	catch_window_timer.start(5.0)
+	if Globals.idle_mode:
+		# In idle mode, start the auto catch timer with a random delay
+		var catch_delay = randf_range(Globals.idle_min_catch_delay, Globals.idle_max_catch_delay)
+		auto_catch_timer.start(catch_delay)
+	else:
+		# Normal mode behavior
+		catch_window_timer.start(5.0)
+
+func auto_catch_fish():
+	if Globals.idle_mode and indicator_active.visible:
+		# Calculate success chance
+		if randf() <= Globals.idle_catch_chance:
+			try_catch_fish()
+		else:
+			miss_fish()
 
 func miss_fish():
 	print("Failed to catch the fish!")
@@ -89,16 +120,15 @@ func hide_catch_message():
 	fish_caught.visible = false
 
 func _input(event):
-	# Check for space key press
-	if event.is_action_pressed("ui_accept"):  # Space bar by default
-		try_catch_fish()
-
-		# Check for mouse click
-	elif event.is_action_pressed("ui_click"):
-		if event is InputEventMouseButton:
-			# Check if click is within fisher or indicator area
-			if is_click_in_area(event.position):
-				try_catch_fish()
+	if event.is_action_pressed("toggle_fishing_mode"):  # You'll need to set this up in your input map
+		toggle_fishing_mode()
+	elif not Globals.idle_mode:  # Only process fishing input in normal mode
+		if event.is_action_pressed("ui_accept"):
+			try_catch_fish()
+		elif event.is_action_pressed("ui_click"):
+			if event is InputEventMouseButton:
+				if is_click_in_area(event.position):
+					try_catch_fish()
 
 func is_click_in_area(click_pos: Vector2) -> bool:
 	# Convert click position to local coordinates if needed
@@ -112,24 +142,38 @@ func is_click_in_area(click_pos: Vector2) -> bool:
 func try_catch_fish():
 	if indicator_active.visible:
 		print("fish. start!")
-		# Stop both timers
 		catch_window_timer.stop()
-
-
 		fish_spawn_timer.stop()
+		auto_catch_timer.stop()
+		
 		hooked_stinger.visible = true
 		hooked_stinger.play_sfx()
 		await get_tree().create_timer(1).timeout
-		var window_scene = preload("res://Scenes/window.tscn")
-		var window = window_scene.instantiate()
-		add_child(window)
-		window.load_scene("res://Scenes/fishing.tscn", "Fishing")
+		
+		if Globals.idle_mode:
+			# In idle mode, capture the fish data and print it
+			var fish_data = Globals.DexInstance.tracked_fish
+			
+			# Reset the fishing state
+			Globals.FishWasCaught = true
+			Globals.IsFishing = false
+			Globals.DexInstance.free_fish()
+			
+			# Update the UI
+			var format_string := "Caught a {name}! It's about {size}{size_unit}!"
+			fish_caught.visible = true
+			caught_message_timer.start(5.0)
+		else:
+			# Normal mode behavior
+			var window_scene = preload("res://Scenes/window.tscn")
+			var window = window_scene.instantiate()
+			add_child(window)
+			window.load_scene("res://Scenes/fishing.tscn", "Fishing")
+			window.connect("window_closed", Callable(self, "_on_fishing_window_closed"))
+		
 		indicator_normal.visible = true
 		indicator_active.visible = false
 		hooked_stinger.visible = false
-
-		# Connect the window_closed signal to a method in this scene
-		window.connect("window_closed", Callable(self, "_on_fishing_window_closed"))
 
 func _on_fishing_window_closed():
 	print("fishing window closed")
@@ -141,3 +185,52 @@ func _process(delta: float) -> void:
 	time.text = TimeText.format({"time":Globals.current_time})
 	var SeasonText: String = "Current Season: {season}"
 	season.text = SeasonText.format({"season": Globals.current_season})
+
+func toggle_fishing_mode():
+	update_fishing_mode(not Globals.idle_mode)
+
+func update_fishing_mode(new_idle_state: bool):
+	# Update the global state
+	Globals.idle_mode = new_idle_state
+	
+	# Reset all timers
+	fish_spawn_timer.stop()
+	catch_window_timer.stop()
+	auto_catch_timer.stop()
+	
+	# Reset visual states
+	indicator_normal.visible = true
+	indicator_active.visible = false
+	hooked_stinger.visible = false
+	
+	# Cancel any ongoing fishing activity
+	if Globals.IsFishing:
+		Globals.IsFishing = false
+		Globals.FishWasCaught = false
+		Globals.DexInstance.free_fish()
+	
+	# Update UI elements for the new mode
+	if Globals.idle_mode:
+		# Set up idle mode specific UI changes
+		indicator_normal.modulate = Color(0.7, 0.7, 1.0)  # Blue tint for idle mode
+		fish_caught.text = "Idle Fishing Mode Active"
+	else:
+		# Reset to normal mode UI
+		indicator_normal.modulate = Color(1, 1, 1)  # Normal color
+		fish_caught.text = "Active Fishing Mode"
+	
+	# Show mode change message
+	fish_caught.visible = true
+	caught_message_timer.start(2.0)
+	
+	# Start the appropriate fishing timer
+	start_fish_timer()
+	
+	# Emit signal for other systems that might need to know about the mode change
+	emit_signal("fishing_mode_changed", Globals.idle_mode)
+
+func on_mode_toggle_button_toggled(button_pressed: bool):
+	if button_pressed:
+		update_fishing_mode(true)
+	else:
+		update_fishing_mode(false)

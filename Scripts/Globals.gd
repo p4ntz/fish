@@ -137,6 +137,7 @@ func level_up() -> void:
 @export var base_fish_stamina_drain: float = 50
 @export var min_fish_catching_window: float = 5
 @export var max_fish_catching_window: float = 10
+@export var experience_multiplier: float = 1
 
 # Idle Game Stats
 @export var idle_min_fish_window: float = 5
@@ -144,6 +145,7 @@ func level_up() -> void:
 @export var idle_min_catch_delay: float = 0.5
 @export var idle_max_catch_delay: float = 2
 @export var idle_catch_chance: float = 1
+@export var idle_experience_multiplier: float = 0.25
 
 # Player Stats
 @export var total_fish_caught: int = 0

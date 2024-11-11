@@ -139,6 +139,30 @@ func is_click_in_area(click_pos: Vector2) -> bool:
 	var click_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
 	return click_rect.has_point(local_pos)
 
+func get_random_fish_for_idle():
+	var current_season = Globals.current_season
+	var current_time = Globals.current_time
+	var current_location = Globals.get_current_fishing_location()
+	
+	var attempts = 0
+	var max_attempts = 10  # Prevent infinite loop
+	
+	while attempts < max_attempts:
+		var fish: Fish = Globals.DexInstance.random_fish()
+		
+		if fish and is_fish_available(fish, current_time, current_season, current_location):
+			return fish
+		
+		attempts += 1
+	
+	print("No eligible fish found for current season, time, and location after " + str(max_attempts) + " attempts.")
+	return null
+
+func is_fish_available(fish: Fish, current_time: String, current_season: String, current_location: String) -> bool:
+	return (current_location in fish.locations
+		and current_season in fish.seasons
+		and current_time in fish.time_of_day)
+
 func try_catch_fish():
 	if indicator_active.visible:
 		print("fish. start!")
@@ -146,25 +170,48 @@ func try_catch_fish():
 		fish_spawn_timer.stop()
 		auto_catch_timer.stop()
 		
-		hooked_stinger.visible = true
-		hooked_stinger.play_sfx()
-		await get_tree().create_timer(1).timeout
+		if not Globals.idle_mode:
+			hooked_stinger.visible = true
+			hooked_stinger.play_sfx()
+			await get_tree().create_timer(1).timeout
 		
 		if Globals.idle_mode:
 			# In idle mode, capture the fish data and print it
-			var fish_data = Globals.DexInstance.tracked_fish
-			
-			# Reset the fishing state
-			Globals.FishWasCaught = true
-			Globals.IsFishing = false
-			Globals.DexInstance.free_fish()
-			
-			# Update the UI
-			var format_string := "Caught a {name}! It's about {size}{size_unit}!"
-			fish_caught.visible = true
-			caught_message_timer.start(5.0)
+			var fish_data = get_random_fish_for_idle()
+			if fish_data:
+				Globals.DexInstance.tracked_fish = fish_data
+				
+				# Reset the fishing state
+				Globals.FishWasCaught = true
+				Globals.IsFishing = false
+
+				var size = randf() * 10  # Random size between 0 and 10 for testing
+
+				# Record the catch
+				fish_data.record_catch(size, Globals.get_current_fishing_location())
+				
+				# Update the UI
+				var format_string := "Caught a {name}! It's about {size}{size_unit}!"
+				fish_caught.text = format_string.format({
+					"name": fish_data.fish_name,
+					"size": snapped(size, Globals.SizeDecimalPlaces),
+					"size_unit": fish_data.size_unit
+				})
+				fish_caught.visible = true
+				caught_message_timer.start(5.0)
+				
+				# Calculate and add experience
+				var exp_gained = fish_data.calculate_current_EXP(size)
+				Globals.gain_experience(exp_gained)
+				
+				print("Caught a " + fish_data.fish_name + " of size " + str(size) + fish_data.size_unit + ". Gained " + str(exp_gained) + " EXP.")
+				
+				# Start the next fish spawn timer
+				start_fish_timer()
+			else:
+				print("No fish caught in idle mode.")
 		else:
-			# Normal mode behavior
+			# Normal mode behavior (unchanged)
 			var window_scene = preload("res://Scenes/window.tscn")
 			var window = window_scene.instantiate()
 			add_child(window)
@@ -173,7 +220,8 @@ func try_catch_fish():
 		
 		indicator_normal.visible = true
 		indicator_active.visible = false
-		hooked_stinger.visible = false
+		if not Globals.idle_mode:
+			hooked_stinger.visible = false
 
 func _on_fishing_window_closed():
 	print("fishing window closed")

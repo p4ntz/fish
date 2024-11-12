@@ -15,6 +15,8 @@ extends Node
 @export var fishing_locations: Array = []
 @export var current_fishing_location: String = "air"  # Store the current water body type
 
+signal fishing_location_changed(new_location: String)
+
 func add_fishing_location(location: Vector2, water_type: String):
 	fishing_locations.append({
 		"position": location,
@@ -36,6 +38,8 @@ func set_current_fishing_location(water_type: String):
 		print("Total locations discovered: ", total_locations_discovered)
 	if not location_exists:
 		add_fishing_location(Vector2.ZERO, water_type)
+
+	emit_signal("fishing_location_changed", water_type)
 
 func get_current_fishing_location() -> String:
 	return current_fishing_location

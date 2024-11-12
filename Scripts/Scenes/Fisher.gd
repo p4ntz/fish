@@ -61,6 +61,8 @@ func _ready():
 	# Start the first fish spawn timer
 	start_fish_timer()
 
+	Globals.fishing_location_changed.connect(_on_fishing_location_changed)
+
 	# Display a message if we just left the Fishing Game
 	if Globals.IsFishing:
 		if Globals.FishWasCaught:
@@ -282,3 +284,17 @@ func on_mode_toggle_button_toggled(button_pressed: bool):
 		update_fishing_mode(true)
 	else:
 		update_fishing_mode(false)
+
+func _on_fishing_location_changed(_new_location: String):
+	# Reset all relevant timers
+	fish_spawn_timer.stop()
+	catch_window_timer.stop()
+	auto_catch_timer.stop()
+	
+	# Reset visual states
+	indicator_normal.visible = true
+	indicator_active.visible = false
+	hooked_stinger.visible = false
+	
+	# Start a new fish spawn timer
+	start_fish_timer()

@@ -704,5 +704,101 @@
 			"night"
 		],
 		"sprite_path": "res://Sprites/lil Fish.png"
+	},
+	"31": {
+		"fish_name": "cave fish",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"cave"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
+	},
+	"32": {
+		"fish_name": "sirajo goby",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"waterfall"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
+	},
+	"33": {
+		"fish_name": "crevice kelpfish",
+		"difficulty": 1,
+		"rarity": 0.1,
+		"locations": [
+			"crevice"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
+	},
+	"34": {
+		"fish_name": "Abyssal Anglerfish",
+		"difficulty": 4,
+		"rarity": 0.05,
+		"locations": [
+			"deep pond",
+			"sea",
+			"ravine",
+			"abyss",
+			"well"
+		],
+		"scientific_name": "",
+		"description": "",
+		"seasons": [
+			"spring",
+			"summer",
+			"fall",
+			"winter"
+		],
+		"time_of_day": [
+			"morning",
+			"afternoon",
+			"evening",
+			"night"
+		],
+		"sprite_path": "res://Sprites/lil Fish.png"
 	}
 }

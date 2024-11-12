@@ -1,7 +1,7 @@
 # TestScene.gd
 extends Node2D
 
-var window_scene := preload("res://Scenes/WindowTest.tscn")  # Adjust path as needed
+var window_scene := preload("res://Scenes/WindowTest.tscn")
 
 func _on_pond_pressed():  # Fixed function name formatting
 	var new_window := window_scene.instantiate()

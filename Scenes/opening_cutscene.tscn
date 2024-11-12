@@ -1,0 +1,229 @@
+[gd_scene load_steps=20 format=3 uid="uid://jjp6sf3ss8xr"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/opening_cutscene.gd" id="1_8yste"]
+[ext_resource type="AudioStream" uid="uid://bin1cpyh2815d" path="res://Sound/A Fishy Opening Draft 2.mp3" id="2_dqys6"]
+[ext_resource type="AudioStream" uid="uid://dkw2k61f6ogds" path="res://Sound/A Fishy Opening Confirmation.mp3" id="3_ean3n"]
+[ext_resource type="FontFile" uid="uid://bioiveufqkyt1" path="res://Fonts/gonefishing.ttf" id="4_8p0w7"]
+[ext_resource type="Script" path="res://Scripts/Music/opening_music.gd" id="4_i4l08"]
+[ext_resource type="Texture2D" uid="uid://duckoxr1nhx2t" path="res://Sprites/Wave.png" id="5_t15ph"]
+[ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="6_gccut"]
+[ext_resource type="Script" path="res://Scripts/Music/opening_confirmation.gd" id="6_wstlh"]
+[ext_resource type="FontFile" uid="uid://dwpeji05ovaaj" path="res://Fonts/gonefishinggoofy.ttf" id="7_8ns63"]
+[ext_resource type="AudioStream" uid="uid://c7oxrd8c6ov3y" path="res://Sound/Keewy_Fish.mp3" id="7_15y23"]
+[ext_resource type="Script" path="res://Scripts/Music/fish_voices.gd" id="7_kjpwq"]
+[ext_resource type="PackedScene" uid="uid://btx04p24lx873" path="res://Scenes/Spawnables/bubble.tscn" id="8_58c1t"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s65i8"]
+streams_count = 1
+stream_0/stream = ExtResource("7_15y23")
+
+[sub_resource type="Curve2D" id="Curve2D_h00j4"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -4, 486, 0, 0, 0, 0, -4, -286)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_v38cw"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -4, 720, 0, 0, 0, 0, -4, -186)
+}
+point_count = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y6jf4"]
+load_path = "res://.godot/imported/Wave.png-fcea3d5180ff545cd36e0e106a240190.ctex"
+
+[sub_resource type="Curve2D" id="Curve2D_mx1r8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 640, 900, 0, 0, 0, 0, 640, 360)
+}
+point_count = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pokeo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gccut")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_fcn72"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1280, 720, 0, 0, 0, 0, 0, 720)
+}
+point_count = 2
+
+[node name="OpeningCutscene" type="Node"]
+script = ExtResource("1_8yste")
+bubble_scene = ExtResource("8_58c1t")
+
+[node name="GreenBackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.737255, 0.0588235, 1)
+
+[node name="OpeningMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dqys6")
+script = ExtResource("4_i4l08")
+
+[node name="OpeningConfirmation" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ean3n")
+script = ExtResource("6_wstlh")
+
+[node name="FishVoices" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_s65i8")
+script = ExtResource("7_kjpwq")
+
+[node name="PresentedBy" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -498.5
+offset_top = 150.0
+offset_right = 498.5
+offset_bottom = 201.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_fonts/font = ExtResource("4_8p0w7")
+theme_override_font_sizes/font_size = 50
+text = "Presented by the P4ntz Community Game Jam"
+
+[node name="Wave1" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Path2D_Wave1" type="Path2D" parent="Wave1"]
+position = Vector2(4.76837e-07, -6.10352e-05)
+curve = SubResource("Curve2D_h00j4")
+
+[node name="PathFollow2D_Wave1" type="PathFollow2D" parent="Wave1/Path2D_Wave1"]
+position = Vector2(-4, 486)
+rotation = -1.5708
+rotates = false
+
+[node name="Wave1_Texture" type="TextureRect" parent="Wave1/Path2D_Wave1/PathFollow2D_Wave1"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 3000.0
+offset_bottom = 1160.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("5_t15ph")
+flip_v = true
+
+[node name="Wave2" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="Path2D_Wave2" type="Path2D" parent="Wave2"]
+position = Vector2(4.76837e-07, -6.10352e-05)
+curve = SubResource("Curve2D_v38cw")
+
+[node name="PathFollow2D_Wave2" type="PathFollow2D" parent="Wave2/Path2D_Wave2"]
+position = Vector2(-4, 720)
+rotation = -1.5708
+rotates = false
+
+[node name="Wave2_Texture" type="TextureRect" parent="Wave2/Path2D_Wave2/PathFollow2D_Wave2"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 3000.0
+offset_bottom = 1160.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(0.43, 0.43)
+texture = SubResource("CompressedTexture2D_y6jf4")
+flip_v = true
+
+[node name="FishPath" type="Path2D" parent="."]
+z_index = 2
+curve = SubResource("Curve2D_mx1r8")
+
+[node name="FishPathFollower" type="PathFollow2D" parent="FishPath"]
+position = Vector2(640, 900)
+rotates = false
+
+[node name="AnimatedIntroFish" type="AnimatedSprite2D" parent="FishPath/FishPathFollower"]
+z_index = 3
+sprite_frames = SubResource("SpriteFrames_pokeo")
+animation = &"swim"
+
+[node name="IntroFishText" type="Label" parent="."]
+z_index = 5
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.0
+offset_top = 56.0
+offset_right = 116.0
+offset_bottom = 184.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_colors/font_outline_color = Color(0.607843, 0.737255, 0.0588235, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("7_8ns63")
+theme_override_font_sizes/font_size = 128
+text = "fish."
+
+[node name="IntroPressStart" type="Label" parent="."]
+z_index = 5
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -332.0
+offset_top = -128.0
+offset_right = 332.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_colors/font_outline_color = Color(0.607843, 0.737255, 0.0588235, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("7_8ns63")
+theme_override_font_sizes/font_size = 128
+text = "Press Start"
+
+[node name="BubbleSpawn" type="Path2D" parent="."]
+position = Vector2(-1, 0)
+curve = SubResource("Curve2D_fcn72")
+
+[node name="BubbleSpawnLocation" type="PathFollow2D" parent="BubbleSpawn"]
+position = Vector2(1280, 720)
+rotation = 3.14159
+
+[node name="Bubble" parent="." instance=ExtResource("8_58c1t")]
+
+[node name="Fade" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="FadeToGreen" type="ColorRect" parent="Fade"]
+top_level = true
+visibility_layer = 513
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.737255, 0.0588235, 0)
+
+[connection signal="finished" from="OpeningMusic" to="." method="_on_opening_music_finished"]

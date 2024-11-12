@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://btx04p24lx873"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/bubble.gd" id="1_xwni3"]
+[ext_resource type="Texture2D" uid="uid://boeo454e5fqyh" path="res://Sprites/bubble.png" id="2_nccx0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20lks"]
+radius = 14.0
+
+[node name="Bubble" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = -1.0
+script = ExtResource("1_xwni3")
+
+[node name="BubblePng" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_nccx0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_20lks")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -5,126 +5,103 @@ signal clicked(skill_data)
 var skill_id: String
 var skill_data: Dictionary
 var is_unlocked: bool = false
-var is_hovered: bool = false
 var is_available: bool = false
 var is_within_reach: bool = false
 
+# Game Boy color palette
+@onready var color_lightest: Color = Color.html("#9bbc0f")
+@onready var color_light: Color = Color.html("#8bac0f")
+@onready var color_dark: Color = Color.html("#306230")
+@onready var color_darkest: Color = Color.html("#0f380f")
+
 @onready var background: Panel = $Background
-@onready var icon: TextureRect = $Icon
-@onready var name_label: Label = $Name
+@onready var icon: TextureRect = $Background/Icon
 @onready var description: Label = $Description
+@onready var detail_window: Panel = $DetailWindow
+@onready var name_label: Label = $DetailWindow/Name
+@onready var detail_description: Label = $DetailWindow/Description
+@onready var requirements_label: Label = $DetailWindow/Requirements
 
 func _ready():
-	mouse_entered.connect(_on_mouse_enter)
-	mouse_exited.connect(_on_mouse_exit)
-	
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.2, 0.2, 0.2, 1.0)
-	style.corner_radius_top_left = 5
-	style.corner_radius_top_right = 5
-	style.corner_radius_bottom_left = 5
-	style.corner_radius_bottom_right = 5
-	background.add_theme_stylebox_override("panel", style)
+	detail_window.visible = false
+	_connect_signals()
+	_update_appearance()
+
+func _connect_signals():
+	if background:
+		background.gui_input.connect(_on_background_input)
+	background.mouse_entered.connect(_on_mouse_enter)
+	background.mouse_exited.connect(_on_mouse_exit)
 
 func setup(id: String, data: Dictionary):
 	skill_id = id
 	skill_data = data
-	
-	print("Setting up skill: ", id)
-	print("Data received: ", data)
-	
-	# Check and load icon
 	if icon and data.has("icon") and data.icon != null:
-		icon.texture = load(data.icon)
-		print("Loaded icon: ", data.icon)
+		icon.texture = data.icon
+		print("Skill " + id + " icon set" + str(icon.texture))
 	else:
-		push_warning("No icon found for skill: " + id)
+		push_error("Skill " + id + " is missing an icon")
 	
-	# Check and set name
-	if name_label:
-		if data.has("name") and data.name != "":
-			name_label.text = data.name
-			print("Set name: ", data.name)
-		else:
-			name_label.text = "Skill " + id
-			push_warning("No name found for skill: " + id)
+	description.text = data.get("name", "Skill " + id)
+	name_label.text = data.get("name", "Skill " + id)
+	detail_description.text = data.get("description", "No description available")
 	
-	# Check and set description
-	if description:
-		if data.has("description") and data.description != "":
-			description.text = data.description
-			print("Set description: ", data.description)
-		else:
-			description.text = "No description available"
-			push_warning("No description found for skill: " + id)
+	requirements_label.text = _format_requirements(data.get("requirements", {}))
 	
 	_update_appearance()
+
+func _format_requirements(requirements: Dictionary) -> String:
+	var req_text = "Requirements:\n"
+	
+	if requirements.has("skills"):
+		req_text += "Skills: " + ", ".join(requirements.skills) + "\n"
+	
+	if requirements.has("level"):
+		req_text += "Level: " + str(requirements.level) + "\n"
+	
+	if requirements.has("fish_caught"):
+		req_text += "Fish Caught: " + str(requirements.fish_caught) + "\n"
+	
+	for req in requirements.keys():
+		if req.begins_with("class_") and req.ends_with("_level"):
+			var skill_class = req.trim_prefix("class_").trim_suffix("_level")
+			req_text += skill_class.capitalize() + " Level: " + str(requirements[req]) + "\n"
+	
+	return req_text.strip_edges()
 
 func set_availability(available: bool, within_reach: bool):
 	is_available = available
 	is_within_reach = within_reach
 	_update_appearance()
 
-func _gui_input(event):
+func unlock():
+	is_unlocked = true
+	_update_appearance()
+
+func _on_background_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if is_available or is_unlocked:
 				emit_signal("clicked", skill_data)
 
-func unlock():
-	is_unlocked = true
-	_update_appearance()
-
 func _on_mouse_enter():
-	is_hovered = true
-	_update_appearance()
+	if is_unlocked or is_available or is_within_reach:
+		detail_window.visible = true
+		modulate = Color(1.2, 1.2, 1.2)  # Slightly brighten when hovered
 
 func _on_mouse_exit():
-	is_hovered = false
-	_update_appearance()
+	detail_window.visible = false
+	modulate = Color(1, 1, 1)  # Reset to normal
 
 func _update_appearance():
-	if !background:
-		return
-		
-	var style = background.get_theme_stylebox("panel").duplicate()
-	
-	# Set base color based on status
 	if is_unlocked:
-		style.bg_color = Color(0.2, 0.4, 0.2, 1.0)  # Green for unlocked
+		background.modulate = color_lightest  # Unlocked skills use the lightest color
 	elif is_available:
-		style.bg_color = Color(0.3, 0.3, 0.4, 1.0)  # Blue-ish for available
+		background.modulate = color_light  # Available skills use the light color
+	elif is_within_reach:
+		background.modulate = color_dark  # Within reach skills use the dark color
 	else:
-		style.bg_color = Color(0.2, 0.2, 0.2, 1.0)  # Dark gray for locked
+		background.modulate = color_darkest  # Locked and out of reach skills use the darkest color
 	
-	if is_hovered and (is_available or is_unlocked):
-		style.bg_color = style.bg_color.lightened(0.3)
-		style.border_color = Color(1, 1, 1, 0.5)
-		style.border_width_top = 2
-		style.border_width_right = 2
-		style.border_width_bottom = 2
-		style.border_width_left = 2
-	else:
-		style.border_width_top = 0
-		style.border_width_right = 0
-		style.border_width_bottom = 0
-		style.border_width_left = 0
-	
-	background.add_theme_stylebox_override("panel", style)
-	
-	# Update visibility and opacity based on status
-	if !is_within_reach:
-		# Hide text for skills that are too far in the chain
-		if name_label:
-			name_label.visible = false
-		if description:
-			description.visible = false
-	else:
-		# Set opacity based on unlock status
-		var opacity = 1.0 if (is_unlocked or is_available) else 0.5
-		if name_label:
-			name_label.modulate.a = opacity
-		if description:
-			description.modulate.a = opacity
-		if icon:  # Add null check for icon
-			icon.modulate.a = opacity
+	# Hide detail window for unavailable and out-of-reach skills
+	detail_window.visible = false

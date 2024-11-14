@@ -2,18 +2,15 @@ extends Control
 
 class_name SkillTree
 
-# Signals
 signal skill_clicked(skill_data)
 signal skill_unlocked(skill_id)
 
-# Constants
 const SKILL_SCENE = preload("res://Scenes/skill_node.tscn")
-const CONNECTION_COLOR = Color(0.7, 0.7, 0.7) # Edit this to a classic GB color
+const CONNECTION_COLOR = Color(0.7, 0.7, 0.7)
 const LINE_WIDTH = 2.0
 const ZOOM_SPEED = 0.1
 
-# Variables
-var skills = {}
+var skills = {}  # Dictionary to store skill nodes
 var connections = []
 var drag_start = null
 var is_dragging = false
@@ -21,45 +18,47 @@ var zoom_level = 1.0
 const MIN_ZOOM = 0.5
 const MAX_ZOOM = 2.0
 
-@onready var skill_container: Control = $SkillContainer  # Reference to container node
-
-func create_skill_layout():
-	# Load skill data and create the skill layout
-	load_skill_data()
+@onready var skill_container: Control = $SkillContainer
 
 func _ready():
-	# Create skill container if it doesn't exist
 	if !skill_container:
 		skill_container = Control.new()
 		skill_container.name = "SkillContainer"
 		add_child(skill_container)
 	
-	# Load and create skills
 	load_skill_data()
 	
-	# Unlock first skill by default
-	if skills.has("1"):
-		print("Unlocking initial skill")
-		skills["1"].unlock()
-		skills["1"].set_availability(true, true)  # Set as available and within reach
+	# Debug print skills
+	print("Loaded skills: ", skills.keys())
+	
+	# Unlock and make available the first skill
+	if skills.has("skill1"):
+		print("Unlocking skill1")
+		var skill = skills["skill1"]
+		skill.is_unlocked = true
+		skill.is_available = true
+		skill.is_within_reach = true
+		skill._update_appearance()
 	else:
 		push_error("Could not find initial skill to unlock")
 	
-	# Update availability for all skills after unlocking first one
 	update_skill_availability()
+	queue_redraw() 
 
 func _draw():
-	# Draw connections between skills, accounting for container position and scale
+	# Draw connections between skills
 	for connection in connections:
+		if !skills.has(connection[0]) or !skills.has(connection[1]):
+			continue
+		
 		var start_node = skills[connection[0]]
 		var end_node = skills[connection[1]]
 		
-		# Calculate positions relative to container and apply container's transform
-		var start_pos = skill_container.position + (start_node.position + start_node.size / 2) * skill_container.scale
-		var end_pos = skill_container.position + (end_node.position + end_node.size / 2) * skill_container.scale
+		var start_pos = start_node.global_position + start_node.size / 2
+		var end_pos = end_node.global_position + end_node.size / 2
 		
-		# Draw the line with proper width scaling
 		draw_line(start_pos, end_pos, CONNECTION_COLOR, LINE_WIDTH * zoom_level)
+		print("Drawing connection from ", connection[0], " to ", connection[1])
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -97,10 +96,6 @@ func _update_zoom(mouse_pos: Vector2):
 	# Apply zoom
 	skill_container.scale = Vector2(zoom_level, zoom_level)
 	
-	# Calculate new position to keep mouse point stable
-	var new_mouse_offset = old_mouse_offset * (zoom_level / (zoom_level - ZOOM_SPEED))
-	skill_container.position = mouse_pos - new_mouse_offset
-	
 	queue_redraw()
 
 func add_skill(id: String, data: Dictionary):
@@ -114,6 +109,7 @@ func add_skill(id: String, data: Dictionary):
 	skill_node.position = data.position
 	skills[id] = skill_node
 	skill_node.clicked.connect(_on_skill_clicked)
+	queue_redraw()
 
 func add_connection(from_id: String, to_id: String):
 	connections.append([from_id, to_id])
@@ -121,57 +117,89 @@ func add_connection(from_id: String, to_id: String):
 
 func load_skill_data():
 	var skill_data = {
-		"skill1": {
-			"name": "Skill 1",
-			"description": "This is the first skill",
+		"1": {
+			"name": "Basic Fishing",
+			"description": "Learn the basics of fishing",
 			"icon": preload("res://sprites/bubble.png"),
 			"position": Vector2(-100, -100),
-			"requirements": ["skill2"]
+			"requirements": {
+				"level": 1,
+				"fish_caught": 0
+			}
 		},
-		"skill2": {
-			"name": "Skill 2",
-			"description": "This is the second skill",
-			"icon": preload("res://sprites/bubble.png"),
+		"2": {
+			"name": "Advanced Casting",
+			"description": "Improve your casting technique",
+			"icon": preload("res://Sprites/bubble.png"),
 			"position": Vector2(100, -100),
-			"requirements": ["skill3"]
+			"requirements": {
+				"skills": ["1"],
+				"level": 5,
+				"fish_caught": 10
+			}
 		},
-		"skill3": {
-			"name": "Skill 3",
-			"description": "This is the third skill",
+		"3": {
+			"name": "Master Angler",
+			"description": "Become a true master of fishing",
 			"icon": preload("res://sprites/bubble.png"),
 			"position": Vector2(0, 100),
-			"requirements": []
+			"requirements": {
+				"skills": ["2"],
+				"level": 10,
+				"fish_caught": 50
+			}
 		}
 	}
 	
-	# Add skills
 	for id in skill_data:
 		add_skill(id, skill_data[id])
 	
-	# Add connections based on requirements
 	for id in skill_data:
-		for req in skill_data[id].requirements:
-			add_connection(req, id)
+		if skill_data[id].has("requirements"):
+			for req in skill_data[id].requirements:
+				add_connection(req, id)
 
 func is_skill_available(skill_id: String) -> bool:
 	var skill_data = skills[skill_id].skill_data
-	if !skill_data.has("requirements") or skill_data.requirements.is_empty():
+	if !skill_data.has("requirements"):
 		return true
-		
-	for req in skill_data.requirements:
-		if !skills[req].is_unlocked:
-			return false
+	
+	var requirements = skill_data.requirements
+	
+	# Check skill prerequisites
+	if requirements.has("skills"):
+		for req in requirements.skills:
+			if !skills[req].is_unlocked:
+				return false
+	
+	# Check level requirement
+	if requirements.has("level") and Globals.fisher_level < requirements.level:
+		return false
+	
+	# Check fish caught requirement
+	if requirements.has("fish_caught") and Globals.total_fish_caught < requirements.fish_caught:
+		return false
+	
+	# Check class level requirement
+	for req in requirements.keys():
+		if req.begins_with("class_") and req.ends_with("_level"):
+			var skill_class = req.trim_prefix("class_").trim_suffix("_level")
+			var required_level = requirements[req]
+			if Globals.get("class_" + skill_class + "_level") < required_level:
+				return false
+	
 	return true
 
 func is_skill_within_reach(skill_id: String) -> bool:
 	var skill_data = skills[skill_id].skill_data
 	if !skill_data.has("requirements"):
 		return true
-		
-	# Check if any required skill is unlocked or available
-	for req in skill_data.requirements:
-		if skills[req].is_unlocked or is_skill_available(req):
-			return true
+	
+	if skill_data.requirements.has("skills"):
+		for req in skill_data.requirements.skills:
+			if skills[req].is_unlocked or is_skill_available(req):
+				return true
+	
 	return false
 
 func update_skill_availability():
@@ -180,6 +208,10 @@ func update_skill_availability():
 		var within_reach = is_skill_within_reach(skill_id)
 		skills[skill_id].set_availability(available, within_reach)
 		print("Skill ", skill_id, " availability: ", available, " within reach: ", within_reach)
+	
+	# Ensure the first skill is always visible
+	if skills.has("skill1"):
+		skills["skill1"].set_availability(true, true)
 
 func _on_skill_clicked(skill_data):
 	var skill_id = ""
@@ -190,7 +222,7 @@ func _on_skill_clicked(skill_data):
 	
 	if skill_id != "":
 		if skills[skill_id].is_unlocked:
-			print("Cannot lock skills once unlocked")
+			print("Skill already unlocked")
 		elif is_skill_available(skill_id):
 			print("Unlocking skill: ", skill_id)
 			unlock_skill(skill_id)
@@ -203,4 +235,4 @@ func unlock_skill(skill_id: String):
 	if skills.has(skill_id) and is_skill_available(skill_id):
 		skills[skill_id].unlock()
 		emit_signal("skill_unlocked", skill_id)
-		update_skill_availability()  # Update availability after unlocking
+		update_skill_availability()

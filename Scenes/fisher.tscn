@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://buad1dyyyy7aw"]
+[gd_scene load_steps=13 format=3 uid="uid://buad1dyyyy7aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/Fisher.gd" id="1_4qm21"]
 [ext_resource type="Texture2D" uid="uid://1rai4xu0bm1u" path="res://Sprites/Fisher.png" id="1_ieamg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Logic/required_exp.gd" id="9_3qt75"]
 [ext_resource type="Script" path="res://Scripts/SFX/hooked_sfx.gd" id="10_0todo"]
 [ext_resource type="Texture2D" uid="uid://bwtjcgps2taq" path="res://Sprites/hooked.png" id="10_mxvva"]
+[ext_resource type="Script" path="res://Scripts/Logic/idle_button.gd" id="12_xtnhj"]
 
 [node name="Fisher" type="Node2D"]
 script = ExtResource("1_4qm21")
@@ -94,4 +95,6 @@ offset_left = 1158.0
 offset_top = 6.0
 offset_right = 1276.0
 offset_bottom = 30.0
+focus_mode = 0
 text = "Idle Mode"
+script = ExtResource("12_xtnhj")

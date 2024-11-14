@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4n33w5u131ad"]
+[gd_scene load_steps=9 format=3 uid="uid://b4n33w5u131ad"]
 
 [ext_resource type="Script" path="res://Scripts/Logic/WaterWindowSpawn.gd" id="1_vpjux"]
 [ext_resource type="PackedScene" uid="uid://buad1dyyyy7aw" path="res://Scenes/fisher.tscn" id="1_wa21t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Logic/gutscha_button.gd" id="4_8bomr"]
 [ext_resource type="Script" path="res://Scripts/Scenes/pond_tutorial.gd" id="5_npxem"]
 [ext_resource type="Script" path="res://Scripts/Scenes/catching_tutorial.gd" id="6_fp04f"]
+[ext_resource type="Script" path="res://Scripts/Logic/skill_tree_button.gd" id="8_ax8ia"]
 
 [node name="Game Background Node" type="Node2D"]
 script = ExtResource("1_vpjux")
@@ -57,5 +58,17 @@ text = "Hey fish. fans! Hope youre ready to fish! make sure to pull the rod in t
 When you hook a fish, press start to start reeling it in!"
 script = ExtResource("6_fp04f")
 
+[node name="Gutscha2" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 854.0
+offset_top = 690.0
+offset_right = 994.0
+offset_bottom = 721.0
+focus_mode = 0
+action_mode = 0
+text = "Skill Tree"
+script = ExtResource("8_ax8ia")
+
 [connection signal="pressed" from="Pond" to="." method="_on_pond_pressed"]
 [connection signal="pressed" from="Gutscha" to="Gutscha" method="_on_pressed"]
+[connection signal="pressed" from="Gutscha2" to="Gutscha2" method="_on_pressed"]

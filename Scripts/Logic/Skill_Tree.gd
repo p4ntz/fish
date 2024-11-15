@@ -155,8 +155,8 @@ func load_skill_data():
 		add_skill(id, skill_data[id])
 	
 	for id in skill_data:
-		if skill_data[id].has("requirements"):
-			for req in skill_data[id].requirements:
+		if skill_data[id].has("requirements") and skill_data[id].requirements.has("skills"):
+			for req in skill_data[id].requirements.skills:
 				add_connection(req, id)
 
 func is_skill_available(skill_id: String) -> bool:

@@ -19,7 +19,7 @@ var auto_catch_timer: Timer
 
 var overlay_layer: CanvasLayer
 
-signal fishing_mode_changed(is_idle: bool)
+signal fishing_mode_changed()
 
 func _ready():
 	# Hide the active indicator at start

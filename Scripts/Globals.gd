@@ -16,6 +16,7 @@ extends Node
 @export var current_fishing_location: String = "air"  # Store the current water body type
 
 signal fishing_location_changed(new_location: String)
+signal fishing_game_over
 
 func add_fishing_location(location: Vector2, water_type: String):
 	fishing_locations.append({

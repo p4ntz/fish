@@ -32,9 +32,9 @@ func _ready():
 	print("Loaded skills: ", skills.keys())
 	
 	# Unlock and make available the first skill
-	if skills.has("skill1"):
-		print("Unlocking skill1")
-		var skill = skills["skill1"]
+	if skills.has("1"):
+		print("Unlocking skill 1")
+		var skill = skills["1"]
 		skill.is_unlocked = true
 		skill.is_available = true
 		skill.is_within_reach = true

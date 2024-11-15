@@ -18,7 +18,7 @@ var zoom_level = 1.0
 const MIN_ZOOM = 0.5
 const MAX_ZOOM = 2.0
 
-@onready var skill_container: Control = $SkillContainer
+@onready var skill_container: Control
 
 func _ready():
 	if !skill_container:

@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://1tw2di46bglc"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/action_fish_caught.gd" id="1_7nb3q"]
+[ext_resource type="Texture2D" uid="uid://dbymi8a7pd0" path="res://Sprites/lil Fish.png" id="2_kpkw0"]
+[ext_resource type="AudioStream" uid="uid://dkw2k61f6ogds" path="res://Sound/A Fishy Opening Confirmation.mp3" id="3_s0oqa"]
+[ext_resource type="Script" path="res://Scripts/SFX/general_sfx.gd" id="4_e4gd2"]
+
+[node name="ActionFishCaught" type="Node"]
+script = ExtResource("1_7nb3q")
+
+[node name="GreenBackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.737255, 0.0588235, 1)
+
+[node name="YouCaughtA" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 32.0
+offset_right = 186.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_font_sizes/font_size = 64
+text = "You caught a"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -252.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="FishName" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_font_sizes/font_size = 64
+text = "Placeholder!"
+
+[node name="FishSprite" type="PanelContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/FishSprite"]
+layout_mode = 2
+texture = ExtResource("2_kpkw0")
+stretch_mode = 5
+
+[node name="Size" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0588235, 0.219608, 0.0588235, 1)
+theme_override_font_sizes/font_size = 32
+text = "Size: 69cm"
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -68.0
+offset_right = 63.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+action_mode = 0
+text = "Return"
+icon_alignment = 1
+
+[node name="FishCaughtSceneSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_s0oqa")
+script = ExtResource("4_e4gd2")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
